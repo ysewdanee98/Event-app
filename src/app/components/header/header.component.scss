@@ -1,0 +1,62 @@
+.header {
+  // background: grey;
+  height: 80px;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+
+  .buttonAvatar {
+    background: url(/assets/avatar.jpg);
+    background-size: 100%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .search-container {
+    display: flex;
+
+    .searchTerm {
+      width: 75%;
+      border: 2px solid black;
+      border-right: none;
+      padding: 3px;
+      height: 24px;
+      border-radius: 5px 0 0 5px;
+    }
+
+    .searchButton {
+      background:grey;
+      background-image: url(/assets/searchIcon.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      border-left: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+
+  }
+
+}
+
+// ::ng-deep.mat-menu-panel {
+//   /* These numbers are my requirement, put something which suits yours */
+//     transform: translate(0px, 0px);
+//     background-color:grey;
+//     // width: 100px;
+//     // margin-top: 1px;
+//     margin-left: 85%;
+// }
+// // .mat-menu-item {
+// //   color: black !important;
+// // }
+// // button.mat-menu-item{
+// //   background-color: white;
+// // }
+// button.mat-menu-item:hover {
+//   background-color: grey;
+//   color: white !important;
+// }

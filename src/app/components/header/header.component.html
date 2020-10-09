@@ -1,0 +1,27 @@
+<div class="header">
+  <div style="float: right; padding:10px; padding-top: 20px;">
+    <div class="menu-section">
+      <!-- <button mat-icon-button [matMenuTriggerFor]="basic"> -->
+      <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <!-- <mat-menu #basic="matMenu">
+        <button mat-menu-item  (click)="selectMenu('Basic.Item1')">Basic.Item1</button>
+        <button mat-menu-item (click)="selectMenu('Basic.Item2')">Basic.Item2</button>
+      </mat-menu> -->
+    </div>
+  </div>
+  <div style="float: right; padding:10px; padding-top: 20px; margin-right: 3%;">
+    <div class="buttonAvatar" (click)="avatarClick()"></div>
+  </div>
+  <div style="float: left; padding:5px; padding-bottom: 0px;">
+    <img src="assets/logo-event.png" width="300" height="70" alt="Event logo">
+  </div>
+  <div style="padding:10px; padding-top: 30px; margin-left: 30%; width: 20%">
+    <div class="search-container">
+      <input type="text" [(ngModel)]="searchItem" class="searchTerm" placeholder="Search for ...">
+      <div class="searchButton" (click)="searchforItem()"></div>
+    </div>
+  </div>
+</div>
+
