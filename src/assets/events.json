@@ -1,0 +1,130 @@
+[
+  {
+    "eventId": 1,
+    "eventCategory": "Music",
+    "eventSubCategory": "POP",
+    "eventCategoryP": "Public",
+    "eventOn": "Monthly",
+    "eventOnDay": "Every 1st day of the month",
+    "eventStartDay": "2018-22-05",
+    "eventEndDay": "2018-23-09",
+    "eventStartTime": "11:00:00",
+    "eventEndTime": "12:00:00",
+    "eventTitle": "Pop Music Festival",
+    "eventAbout": "Festival Concert Pop Music Xd",
+    "eventPicturePath": [
+      "https://static01.nyt.com/images/2018/12/30/arts/30yearend-pop2/merlin_147857643_8e0c5c65-4549-4946-b51d-49425b9dcf24-superJumbo.jpg?quality=90&auto=webp",
+      "https://event-seven.com/wp-content/uploads/2019/09/Pop-Music.jpg"
+    ],
+    "location": "Ebene",
+    "locVenue": "Cybercity",
+    "locOtherAddress": "",
+    "priceCategory": "Paid",
+    "pricePricing": 3,
+    "priceCategories": [
+      {
+	"ticketName": "Standard",
+        "ticketPrice": 20,
+	"ticketcurrentcy": "Indian Rupees"
+      },
+      {
+	"ticketName": "Prenium",
+        "ticketPrice": 100,
+	"ticketcurrentcy": "Indian Rupees"
+      },
+      {
+	"ticketName": "VIP",
+        "ticketPrice": 1000,
+	"ticketcurrentcy": "Indian Rupees"
+      }
+    ],
+    "restriction": "None",
+    "peopleExpected": 100,
+    "specialGuest": 1,
+    "specialGuestNames": [
+      "John Cena"
+    ],
+    "specialGuestPicturePath": [
+      "https://gmsrp.cachefly.net/images/20/05/04/f52aaa0579b8757184c8daeeae6774ae/960.jpg"
+    ],
+    "specialGuestAdditionalInfo": "John Cena coming",
+    "authorityNotified": "Yes",
+    "authoritySelected": [
+      "Police"
+    ]
+  },
+  {
+    "eventId": 2,
+    "eventCategory": "Food & Drink",
+    "eventSubCategory": "Chinese",
+    "eventCategoryP": "Private",
+    "eventOn": "Yearly",
+    "eventOnDay": "In March",
+    "eventStartDay": "2018-01-03",
+    "eventEndDay": "2024-30-03",
+    "eventStartTime": "10:00:00",
+    "eventEndTime": "18:00:00",
+    "eventTitle": "Come eat and drink",
+    "eventAbout": "Eat chinese food",
+    "eventPicturePath": [
+      "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1920,h_720,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/psbttrrtofiebwvz2hb7/JWMarriottManHoChineseRestaurantinMacau.webp"
+    ],
+    "location": "Ebene",
+    "locVenue": "Nex Tower",
+    "locOtherAddress": "",
+    "priceCategory": "Free",
+    "pricePricing": 0,
+    "priceCategories": [],
+    "restriction": "Women Only",
+    "peopleExpected": 100,
+    "specialGuest": 0,
+    "specialGuestNames": [],
+    "specialGuestPicturePath": [],
+    "specialGuestAdditionalInfo": "",
+    "authorityNotified": "No",
+    "authoritySelected": []
+  },
+  {
+    "eventId": 3,
+    "eventCategory": "Sports & Wellness",
+    "eventSubCategory": "Under 18",
+    "eventCategoryP": "Public",
+    "eventOn": "Monthly",
+    "eventOnDay": "Every Saturday of the month",
+    "eventStartDay": "2018-01-02",
+    "eventEndDay": "2020-30-01",
+    "eventStartTime": "16:00:00",
+    "eventEndTime": "20:00:00",
+    "eventTitle": "Sports is Good!",
+    "eventAbout": "Sport practices",
+    "eventPicturePath": [
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/molly-huddle-of-united-states-competes-in-the-womens-5000-news-photo-1586466671.jpg?crop=0.986xw:0.716xh;0,0.0581xh&resize=980:*",
+      "https://www.readingsd.org/cms/lib/PA01917154/Centricity/Domain/1382/JuanMatos1.png",
+      "https://ichef.bbci.co.uk/images/ic/640x360/p08gxs6y.jpg",
+      "https://www.athleticcentre.com.au/-/media/images/sopa/athletic-centre-site/1920-x-1280/2012_athletic-centre_pole-vault.jpg?ImageResizing=true&w=1024&h=683&mode=crop&hash=C32DEEF7CE49D7EE80400E5D1B3747D88BB665A4"
+    ],
+    "location": "",
+    "locVenue": "",
+    "locOtherAddress": "Reduit Stadium",
+    "priceCategory": "Free",
+    "pricePricing": 0,
+    "priceCategories": [],
+    "restriction": "Children Only",
+    "peopleExpected": 100,
+    "specialGuest": 1,
+    "specialGuestNames": [
+    	"Mohamed Salah",
+	"Sadio Mané"
+    ],
+    "specialGuestPicturePath": [
+	"https://images.daznservices.com/di/library/GOAL/c1/70/mohamed-salah-liverpool-leeds-2020-21_y7gito4lv5r610eplclvv5eis.jpg?t=-2018509612&amp;quality=60&amp;w=800",
+ 	"https://images.daznservices.com/di/library/GOAL/bf/be/sadio-mane-liverpool-watford_15na1agnwusgb1uu7qvnnvew5u.jpg?t=815241929&amp;quality=60&amp;w=800"
+    ],
+    "specialGuestAdditionalInfo": "2 liverpool players are coming, Mo Salah and Sadio Mané",
+    "authorityNotified": "Yes",
+    "authoritySelected": [
+	"Police",
+	"Traffic Control"
+    ]
+  }
+]

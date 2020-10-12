@@ -1,14 +1,9 @@
 <div class="header">
   <div style="float: right; padding:10px; padding-top: 20px;">
     <div class="menu-section">
-      <!-- <button mat-icon-button [matMenuTriggerFor]="basic"> -->
-      <button mat-icon-button>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
       </button>
-      <!-- <mat-menu #basic="matMenu">
-        <button mat-menu-item  (click)="selectMenu('Basic.Item1')">Basic.Item1</button>
-        <button mat-menu-item (click)="selectMenu('Basic.Item2')">Basic.Item2</button>
-      </mat-menu> -->
     </div>
   </div>
   <div style="float: right; padding:10px; padding-top: 20px; margin-right: 3%;">
@@ -24,4 +19,9 @@
     </div>
   </div>
 </div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item  (click)="selectMenu('Item 1')">Item 1</button>
+  <button mat-menu-item (click)="selectMenu('Item 2')">Item 2</button>
+</mat-menu>
 

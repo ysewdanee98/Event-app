@@ -42,21 +42,14 @@
 
 }
 
-// ::ng-deep.mat-menu-panel {
-//   /* These numbers are my requirement, put something which suits yours */
-//     transform: translate(0px, 0px);
-//     background-color:grey;
-//     // width: 100px;
-//     // margin-top: 1px;
-//     margin-left: 85%;
-// }
-// // .mat-menu-item {
-// //   color: black !important;
-// // }
-// // button.mat-menu-item{
-// //   background-color: white;
-// // }
-// button.mat-menu-item:hover {
-//   background-color: grey;
-//   color: white !important;
-// }
+::ng-deep.mat-menu-panel {
+    // transform: translate(0px, 0px);
+    background-color:grey;
+    // margin-top: 1px;
+    margin-left: 85%;
+}
+
+button.mat-menu-item:hover {
+  background-color: black;
+  color: white !important;
+}
