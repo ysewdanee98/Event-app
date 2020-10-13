@@ -5,6 +5,7 @@
     display: table;
     width: 100%;
   }
+  
   .col {
     display: table-cell;
     padding: 15px;
@@ -29,11 +30,12 @@
     }
   }
 
-  a {
+  .mat-class-all {
     color: black;
     display: block;
     padding: 5px;
     text-decoration: none;
+    background:Snow;
     cursor: pointer;
     &.selected{
       background-color: blue;
@@ -43,7 +45,7 @@
 
   }
 
-  a:hover {
+  .mat-class-all:hover {
     color: white;
     background-color: #339FFF;
     border-radius: 5px;

@@ -8,10 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
-import {DemoMaterialModuleModule} from '../demo-material-module/demo-material-module.module';
+import { DemoMaterialModuleModule } from '../demo-material-module/demo-material-module.module';
 import { HomeComponent } from './components/home/home.component';
-import { CommonModule } from '@angular/common';
 import { CreateEventComponent } from './components/create-event/create-event.component';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,6 @@ import { CreateEventComponent } from './components/create-event/create-event.com
     CreateEventComponent
   ],
   imports: [
-    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -31,7 +30,7 @@ import { CreateEventComponent } from './components/create-event/create-event.com
     MatNativeDateModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

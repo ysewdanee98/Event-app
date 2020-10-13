@@ -5,39 +5,98 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>General Information</ng-template>
-      <div><input matInput placeholder="Last name, First name" [(ngModel)]="rating1" formControlName="firstCtrl" required></div><br>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
+
+      <mat-card class="matCard1 card-container-component">
+        <mat-card-title style="text-align: center;">What is the Category of your Event?</mat-card-title>
+        <div class = "cardContainerCategory">
+          <div class="card" *ngFor='let category of form1Categories'>
+            <button mat-icon-button class="matIconButtonCategory" [class.selected]="form1CatetogorySelected==category.category" (click)="form1CategoryChosen(category.category)">
+              <mat-icon>{{category.icon}}</mat-icon>
+            </button>
+            <p1 style="text-align: center;">{{category.category}}</p1>
+          </div>
+        </div>
+        <br>
+        <div *ngIf= "form1SubCategories !=null">
+          <mat-card-content style="text-align: center; font-size: 20px;">Select Subcategory</mat-card-content>
+            <div1 class = "cardContainerSubCategory" *ngFor='let sub of form1SubCategories'>
+              <mat-chip-list>
+              <div class="card" *ngFor="let subCate of sub.subCategory">
+                  <mat-chip class="chipSubCategory" [class.selected]="form1SubCategorySelected==subCate" (click)="form1SubCategoryChosen(subCate)">{{ subCate }}</mat-chip>
+              </div>
+            </mat-chip-list>
+            </div1>
+        </div>
+      </mat-card>
+
+      <mat-card class="matCard2 card-container-component">
+        <mat-card-title style="text-align: center;">Is this a Private or Public Event?</mat-card-title>
+        <mat-button-toggle-group>
+          <mat-button-toggle value="Private" class="matButtonToggle" [class.selected]="form1MatButtonToggleSelected=='Private'" (click)="form1MatButtonToggleChosen('Private')">Private</mat-button-toggle>
+          <mat-button-toggle value="Public" class="matButtonToggle" [class.selected]="form1MatButtonToggleSelected=='Public'" (click)="form1MatButtonToggleChosen('Public')">Public</mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-card>
+
+      <mat-card class="matCard3 card-container-component">
+        <mat-card-title style="text-align: center;">When will this Event be?</mat-card-title>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Select</mat-label>
+          <mat-select>
+            <mat-option (onSelectionChange)="form1DropDown1OnSelectionChanged($event)" *ngFor="let option1 of form1DropDown1" [value]="option1.value">
+              {{option1.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <div *ngIf= "form1DropDown2 !=null">
+          <div1 *ngFor='let sub of form1DropDown2'>
+            <mat-form-field appearance="fill">
+              <mat-label>Select</mat-label>
+                <mat-select>
+                  <mat-option (onSelectionChange)="form1DropDown2OnSelectionChanged($event)" *ngFor="let option2 of sub.dropDown2" [value]="option2">
+                    {{option2}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div1>
+        </div>
+
+
+      </mat-card>
+
+
+      <button mat-button matStepperNext>Next</button>
+
     </form>
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Pricing and Location</ng-template>
-      <div><input matInput formControlName="secondCtrl"  [(ngModel)]="rating2" placeholder="Ex. 1 Main St, New York, NY" required></div><br>
+      <!-- <div><input matInput formControlName="secondCtrl"  [(ngModel)]="rating2" placeholder="Ex. 1 Main St, New York, NY" required></div><br>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
-      </div>
+      </div> -->
     </form>
   </mat-step>
 
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Additional Information</ng-template>
-      <div><input matInput formControlName="thirdCtrl"  [(ngModel)]="rating3" placeholder="Telphone No." required></div><br>
+      <!-- <div><input matInput formControlName="thirdCtrl"  [(ngModel)]="rating3" placeholder="Telphone No." required></div><br>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
-      </div>
+      </div> -->
     </form>
   </mat-step>
 
   <mat-step>
     <ng-template matStepLabel>Summary</ng-template>
     <p>You are now done.</p><br>
-    {{rating1}}, {{rating2}}, {{rating3}}
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button (click)="stepper.reset()">Reset</button>
@@ -45,3 +104,10 @@
   </mat-step>
 
 </mat-horizontal-stepper>
+
+<!-- <form>
+  <mat-form-field>
+    <mat-label>Favorite food</mat-label>
+    <input matInput placeholder="Ex. Pizza" value="Sushi">
+  </mat-form-field>
+</form> -->
