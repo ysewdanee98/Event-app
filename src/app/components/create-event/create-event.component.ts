@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -91,7 +92,7 @@ export class CreateEventComponent implements OnInit {
   form1StartDate: string;
   form1StartDateEvent(event: MatDatepickerInputEvent<Date>) {
     this.form1StartDate = moment(`${event.value}`).format("YYYY-MM-DD");
-    this.getNoOfDatesBetween()
+    this.getNoOfDatesBetween();
   }
 
   form1EndDate: string;
@@ -107,7 +108,18 @@ export class CreateEventComponent implements OnInit {
     this.noOfDatesBetween = Math.floor((Date.UTC(end.getFullYear(), end.getMonth(), end.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()) ) /(1000 * 60 * 60 * 24)) +" days";
     // console.log(Math.floor((Date.UTC(end.getFullYear(), end.getMonth(), end.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()) ) /(1000 * 60 * 60 * 24)));
   }
-  
+
+  form1StartTime: string;
+  form1StartTimeEvent(startT: string){
+    this.form1StartTime = startT;
+    console.log(this.form1StartTime);
+  }
+
+  form1EndTime: string;
+  form1EndTimeEvent(endTime: string){
+    this.form1EndTime = endTime;
+    console.log(this.form1EndTime);
+  }
 
 
 
@@ -119,7 +131,9 @@ export class CreateEventComponent implements OnInit {
       if (this.form1CatetogorySelected == null || this.form1SubCategorySelected == null ||
           this.form1StartDate == null || this.form1StartDate == "Invalid date" ||
           this.form1EndDate == null || this.form1EndDate == "Invalid date" ||
-          this.form1StartDate > this.form1EndDate) {
+          this.form1StartDate > this.form1EndDate ||
+          this.form1StartTime == null || this.form1EndTime == null ||
+          this.form1StartTime == "" || this.form1EndTime == "") {
         console.log("Problem variable");
       } else {
         stepper.next();

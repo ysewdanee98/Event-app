@@ -137,4 +137,13 @@
     width: 50%;
   }
 
+  .cardContainerTime {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    // background: red;
+    margin: auto;
+    width: 30%;
+  }
+
 }

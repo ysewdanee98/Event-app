@@ -81,10 +81,19 @@
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
         </div>
-        <div  style="text-align: center;">{{noOfDatesBetween}}</div>
+        <div style="text-align: center;">{{noOfDatesBetween}}</div>
 
-
-
+        <div  style="text-align: right; color: red;" *ngIf="form1StartTime==null || form1EndTime==null || form1StartTime=='' || form1EndTime==''">* required</div>
+        <div style="text-align: center;">Time</div>
+        <div class = "cardContainerTime">
+          <mat-form-field>
+            <input matInput #startTime type="time" (blur)="form1StartTimeEvent(startTime.value)">
+          </mat-form-field>
+          <div style="margin-top: 20px; font-size: 25px;">-</div>
+          <mat-form-field>
+            <input matInput #endTime type="time" (blur)="form1EndTimeEvent(endTime.value)">
+          </mat-form-field>
+        </div>
 
 
       </mat-card>
