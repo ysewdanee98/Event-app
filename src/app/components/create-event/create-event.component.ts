@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-create-event',
@@ -15,7 +15,9 @@ export class CreateEventComponent implements OnInit {
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      form1ButtonToggleCtrl: new FormControl('',[Validators.required]),
+      form1DropDown1Ctrl: ['', Validators.required],
+      form1DropDown2Ctrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
@@ -25,6 +27,8 @@ export class CreateEventComponent implements OnInit {
     });
     console.log(this.form1Categories);
   }
+
+  get form1() { return this.firstFormGroup.controls; }
 
   form1Categories: { category: string, icon: string, subCategory: string[] }[] = [
     { "category": "Music", "icon": "album", "subCategory": ['Alternative Music', 'Blues', 'Classical Music', 'Country Music', 'Dance Music', 'Electronic Music', 'Hip Hop / RAP', 'Latin Music', 'Jazz', 'Opera', 'POP'] },
@@ -50,10 +54,8 @@ export class CreateEventComponent implements OnInit {
     console.log(this.form1SubCategorySelected);
   }
 
-  form1MatButtonToggleSelected: string = null;
-  form1MatButtonToggleChosen(eventP: string){
-    this.form1MatButtonToggleSelected = eventP;
-    console.log(this.form1MatButtonToggleSelected);
+  get form1MatButtonToggleSelected(){
+    return this.firstFormGroup.get('form1ButtonToggleCtrl');
   }
 
   form1DropDown1: any = [
@@ -80,6 +82,14 @@ export class CreateEventComponent implements OnInit {
     if(event.isUserInput){
       this.form1DropDown2Selected = event.source.viewValue;
       console.log(this.form1DropDown2Selected);
+    }
+  }
+
+  checkIfForm1Ok(){
+    if (this.firstFormGroup.invalid) {
+      console.log("Something Wrong!");
+    } else {
+      console.log("Public or Private? "+this.form1.form1ButtonToggleCtrl.value);
     }
   }
 

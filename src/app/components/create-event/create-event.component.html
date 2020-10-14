@@ -30,10 +30,11 @@
       </mat-card>
 
       <mat-card class="matCard2 card-container-component">
+        <div  style="text-align: right; color: red;" *ngIf="form1MatButtonToggleSelected.errors?.required">* required</div>
         <mat-card-title style="text-align: center;">Is this a Private or Public Event?</mat-card-title>
-        <mat-button-toggle-group>
-          <mat-button-toggle value="Private" class="matButtonToggle" [class.selected]="form1MatButtonToggleSelected=='Private'" (click)="form1MatButtonToggleChosen('Private')">Private</mat-button-toggle>
-          <mat-button-toggle value="Public" class="matButtonToggle" [class.selected]="form1MatButtonToggleSelected=='Public'" (click)="form1MatButtonToggleChosen('Public')">Public</mat-button-toggle>
+        <mat-button-toggle-group formControlName="form1ButtonToggleCtrl" required [class.is-invalid]="form1MatButtonToggleSelected.invalid" class="form-control">
+          <mat-button-toggle value="Private" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Private'">Private</mat-button-toggle>
+          <mat-button-toggle value="Public" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Public'">Public</mat-button-toggle>
         </mat-button-toggle-group>
       </mat-card>
 
@@ -42,7 +43,7 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Select</mat-label>
-          <mat-select>
+          <mat-select formControlName="form1DropDown1Ctrl" required>
             <mat-option (onSelectionChange)="form1DropDown1OnSelectionChanged($event)" *ngFor="let option1 of form1DropDown1" [value]="option1.value">
               {{option1.viewValue}}
             </mat-option>
@@ -54,7 +55,7 @@
           <div1 *ngFor='let sub of form1DropDown2'>
             <mat-form-field appearance="fill">
               <mat-label>Select</mat-label>
-                <mat-select>
+                <mat-select formControlName="form1DropDown2Ctrl" required>
                   <mat-option (onSelectionChange)="form1DropDown2OnSelectionChanged($event)" *ngFor="let option2 of sub.dropDown2" [value]="option2">
                     {{option2}}
                   </mat-option>
@@ -67,7 +68,7 @@
       </mat-card>
 
 
-      <button mat-button matStepperNext>Next</button>
+      <button mat-button (click)="checkIfForm1Ok()" matStepperNext>Next</button>
 
     </form>
   </mat-step>
@@ -75,11 +76,11 @@
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Pricing and Location</ng-template>
-      <!-- <div><input matInput formControlName="secondCtrl"  [(ngModel)]="rating2" placeholder="Ex. 1 Main St, New York, NY" required></div><br>
+      <!-- <div><input matInput formControlName="secondCtrl"  [(ngModel)]="rating2" placeholder="Ex. 1 Main St, New York, NY" required></div><br> -->
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
-      </div> -->
+      </div>
     </form>
   </mat-step>
 
