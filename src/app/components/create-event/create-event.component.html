@@ -7,8 +7,8 @@
       <ng-template matStepLabel>General Information</ng-template>
 
       <mat-card class="matCard1 card-container-component">
-        <div  style="text-align: right; color: red;" *ngIf="form1CatetogorySelected == null">* required</div>
         <mat-card-title style="text-align: center;">What is the Category of your Event?</mat-card-title>
+        <div  style="text-align: right; color: red;" *ngIf="form1CatetogorySelected == null">* required</div>
         <div class = "cardContainerCategory">
           <div class="card" *ngFor='let category of form1Categories'>
             <button mat-icon-button class="matIconButtonCategory" [class.selected]="form1CatetogorySelected==category.category" (click)="form1CategoryChosen(category.category)">
@@ -19,8 +19,8 @@
         </div>
         <br>
         <div *ngIf= "form1SubCategories !=null">
-          <div  style="text-align: right; color: red;" *ngIf="form1SubCategorySelected == null">* required</div>
           <mat-card-content style="text-align: center; font-size: 20px;">Select Subcategory</mat-card-content>
+          <div  style="text-align: right; color: red;" *ngIf="form1SubCategorySelected == null">* required</div>
             <div1 class = "cardContainerSubCategory" *ngFor='let sub of form1SubCategories'>
               <mat-chip-list>
               <div class="card" *ngFor="let subCate of sub.subCategory">
@@ -32,8 +32,8 @@
       </mat-card>
 
       <mat-card class="matCard2 card-container-component">
-        <div  style="text-align: right; color: red;" *ngIf="form1MatButtonToggleSelected.errors?.required">* required</div>
         <mat-card-title style="text-align: center;">Is this a Private or Public Event?</mat-card-title>
+        <div  style="text-align: right; color: red;" *ngIf="form1MatButtonToggleSelected.errors?.required">* required</div>
         <mat-button-toggle-group formControlName="form1ButtonToggleCtrl" required [class.is-invalid]="form1MatButtonToggleSelected.invalid" class="form-control">
           <mat-button-toggle value="Private" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Private'">Private</mat-button-toggle>
           <mat-button-toggle value="Public" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Public'">Public</mat-button-toggle>
@@ -67,9 +67,6 @@
 
         <div  style="text-align: right; color: red;" *ngIf="form1StartDate==null || form1EndDate==null ">* required</div>
         <div  style="text-align: right; color: red;" *ngIf="form1StartDate=='Invalid date'|| form1EndDate=='Invalid date' || form1StartDate > form1EndDate">* invalid date</div>
-
-
-
         <div class = "cardContainerDate">
           <mat-form-field appearance="fill">
             <mat-label>Starts</mat-label>
@@ -84,16 +81,13 @@
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
         </div>
+        <div  style="text-align: center;">{{noOfDatesBetween}}</div>
 
-        <div>{{form1StartDate}}</div>
-        <div>{{form1EndDate}}</div>
+
+
+
 
       </mat-card>
-
-
-
-
-
 
 
       <button mat-button (click)="form1GoForward(stepper)">Next</button>

@@ -91,12 +91,23 @@ export class CreateEventComponent implements OnInit {
   form1StartDate: string;
   form1StartDateEvent(event: MatDatepickerInputEvent<Date>) {
     this.form1StartDate = moment(`${event.value}`).format("YYYY-MM-DD");
+    this.getNoOfDatesBetween()
   }
 
   form1EndDate: string;
   form1EndDateEvent(event: MatDatepickerInputEvent<Date>) {
     this.form1EndDate = moment(`${event.value}`).format("YYYY-MM-DD");
+    this.getNoOfDatesBetween();
   }
+
+  noOfDatesBetween: string = "";
+  getNoOfDatesBetween(){
+    let start = new Date(this.form1StartDate);
+    let end = new Date(this.form1EndDate);
+    this.noOfDatesBetween = Math.floor((Date.UTC(end.getFullYear(), end.getMonth(), end.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()) ) /(1000 * 60 * 60 * 24)) +" days";
+    // console.log(Math.floor((Date.UTC(end.getFullYear(), end.getMonth(), end.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()) ) /(1000 * 60 * 60 * 24)));
+  }
+  
 
 
 
