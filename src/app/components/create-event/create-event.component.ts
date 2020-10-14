@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-create-event',
@@ -85,12 +86,22 @@ export class CreateEventComponent implements OnInit {
     }
   }
 
-  checkIfForm1Ok(){
+  
+
+
+
+
+
+  form1GoForward(stepper: MatStepper){
     if (this.firstFormGroup.invalid) {
-      console.log("Something Wrong!");
+      console.log("Invalid");
     } else {
-      console.log("Public or Private? "+this.form1.form1ButtonToggleCtrl.value);
+      if (this.form1CatetogorySelected == null || this.form1SubCategorySelected == null) {
+        console.log("Selected null");
+      } else {
+        stepper.next();
+      }
     }
-  }
+}
 
 }
