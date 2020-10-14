@@ -43,7 +43,7 @@
       <mat-card class="matCard3 card-container-component">
         <mat-card-title style="text-align: center;">When will this Event be?</mat-card-title>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field style="width: 20%;" appearance="fill">
           <mat-label>Select</mat-label>
           <mat-select formControlName="form1DropDown1Ctrl" required>
             <mat-option (onSelectionChange)="form1DropDown1OnSelectionChanged($event)" *ngFor="let option1 of form1DropDown1" [value]="option1.value">
@@ -54,7 +54,7 @@
 
         <div *ngIf= "form1DropDown2 !=null">
           <div1 *ngFor='let sub of form1DropDown2'>
-            <mat-form-field appearance="fill">
+            <mat-form-field style="width: 20%;" appearance="fill">
               <mat-label>Select</mat-label>
                 <mat-select formControlName="form1DropDown2Ctrl" required>
                   <mat-option (onSelectionChange)="form1DropDown2OnSelectionChanged($event)" *ngFor="let option2 of sub.dropDown2" [value]="option2">
@@ -64,6 +64,29 @@
               </mat-form-field>
           </div1>
         </div>
+
+        <div  style="text-align: right; color: red;" *ngIf="form1StartDate==null || form1EndDate==null ">* required</div>
+        <div  style="text-align: right; color: red;" *ngIf="form1StartDate=='Invalid date'|| form1EndDate=='Invalid date' || form1StartDate > form1EndDate">* invalid date</div>
+
+
+
+        <div class = "cardContainerDate">
+          <mat-form-field appearance="fill">
+            <mat-label>Starts</mat-label>
+            <input matInput [matDatepicker]="picker1" (dateChange)="form1StartDateEvent($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Ends By</mat-label>
+            <input matInput [matDatepicker]="picker2" (dateChange)="form1EndDateEvent($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div>{{form1StartDate}}</div>
+        <div>{{form1EndDate}}</div>
 
       </mat-card>
 

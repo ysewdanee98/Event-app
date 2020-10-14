@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatStepper } from '@angular/material/stepper';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-create-event',
@@ -86,8 +88,15 @@ export class CreateEventComponent implements OnInit {
     }
   }
 
-  
+  form1StartDate: string;
+  form1StartDateEvent(event: MatDatepickerInputEvent<Date>) {
+    this.form1StartDate = moment(`${event.value}`).format("YYYY-MM-DD");
+  }
 
+  form1EndDate: string;
+  form1EndDateEvent(event: MatDatepickerInputEvent<Date>) {
+    this.form1EndDate = moment(`${event.value}`).format("YYYY-MM-DD");
+  }
 
 
 
@@ -96,8 +105,11 @@ export class CreateEventComponent implements OnInit {
     if (this.firstFormGroup.invalid) {
       console.log("Invalid");
     } else {
-      if (this.form1CatetogorySelected == null || this.form1SubCategorySelected == null) {
-        console.log("Selected null");
+      if (this.form1CatetogorySelected == null || this.form1SubCategorySelected == null ||
+          this.form1StartDate == null || this.form1StartDate == "Invalid date" ||
+          this.form1EndDate == null || this.form1EndDate == "Invalid date" ||
+          this.form1StartDate > this.form1EndDate) {
+        console.log("Problem variable");
       } else {
         stepper.next();
       }

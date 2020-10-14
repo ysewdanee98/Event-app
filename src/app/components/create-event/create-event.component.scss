@@ -124,9 +124,17 @@
     flex-direction: row;
     background: transparent;
     align-items: center;
+    // background: blue;
+    margin: auto;
+  }
+
+  .cardContainerDate {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     // background: red;
     margin: auto;
-    width: 13%;
+    width: 50%;
   }
 
 }
