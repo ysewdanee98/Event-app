@@ -18,6 +18,7 @@
 }
 
 .matCard1 {
+  text-align: center;
 
   .cardContainerCategory {
     display: flex;
@@ -100,19 +101,11 @@
 }
 
 .matCard2 {
-
-  mat-button-toggle-group {
-    display: flex;
-    flex-direction: row;
-    background: transparent;
-    // background: blue;
-    margin: auto;
-    width: 155px;
-  }
+  text-align: center;
 
   .matButtonToggle {
     background-color:Azure;
-    padding: 5px;
+    padding: 1px;
     font-size: 15px;
     color: blue;
     &.selected{
@@ -124,61 +117,26 @@
 }
 
 .matCard3 {
+  text-align: center;
 
   mat-form-field {
-    display: flex;
-    flex-direction: row;
-    background: transparent;
     // background: blue;
-    margin: auto;
-  }
-
-  .cardContainerDate {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    // background: red;
-    margin: auto;
-    width: 40%;
-  }
-
-  .cardContainerTime {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    // background: red;
-    margin: auto;
-    width: 30%;
   }
 
 }
 
-.matCard4 {
+.matCard4N5 {
+  text-align: center;
 
   mat-form-field {
-    display: flex;
-    flex-direction: row;
-    background: transparent;
+    width: 50%;
     // background: blue;
-    margin: auto;
-  }
-
-}
-
-.matCard5 {
-
-  mat-form-field {
-    display: flex;
-    flex-direction: row;
-    background: transparent;
-    // background: blue;
-    margin: auto;
   }
 
 }
 
 .matCard6 {
+  text-align: center;
 
-  
 
 }
