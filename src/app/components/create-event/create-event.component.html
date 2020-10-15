@@ -7,7 +7,7 @@
       <ng-template matStepLabel>General Information</ng-template>
 
       <mat-card class="matCard1 card-container-component">
-        <mat-card-title style="text-align: center;">What is the Category of your Event?</mat-card-title>
+        <mat-card-title style="text-align: center;"><span  style="padding-left: 8px; padding-right: 8px;" class="dotNumber">1</span> What is the Category of your Event?</mat-card-title>
         <div  style="text-align: right; color: red;" *ngIf="form1CatetogorySelected == null">* required</div>
         <div class = "cardContainerCategory">
           <div class="card" *ngFor='let category of form1Categories'>
@@ -32,7 +32,7 @@
       </mat-card>
 
       <mat-card class="matCard2 card-container-component">
-        <mat-card-title style="text-align: center;">Is this a Private or Public Event?</mat-card-title>
+        <mat-card-title style="text-align: center;"><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">2</span> Is this a Private or Public Event?</mat-card-title>
         <div  style="text-align: right; color: red;" *ngIf="form1MatButtonToggleSelected.errors?.required">* required</div>
         <mat-button-toggle-group formControlName="form1ButtonToggleCtrl" required [class.is-invalid]="form1MatButtonToggleSelected.invalid" class="form-control">
           <mat-button-toggle value="Private" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Private'">Private</mat-button-toggle>
@@ -41,9 +41,9 @@
       </mat-card>
 
       <mat-card class="matCard3 card-container-component">
-        <mat-card-title style="text-align: center;">When will this Event be?</mat-card-title>
+        <mat-card-title style="text-align: center;"><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">3</span> When will this Event be?</mat-card-title>
 
-        <mat-form-field style="width: 20%;" appearance="fill">
+        <mat-form-field style="width: 15%;" appearance="fill">
           <mat-label>Select</mat-label>
           <mat-select formControlName="form1DropDown1Ctrl" required>
             <mat-option (onSelectionChange)="form1DropDown1OnSelectionChanged($event)" *ngFor="let option1 of form1DropDown1" [value]="option1.value">
@@ -54,7 +54,7 @@
 
         <div *ngIf= "form1DropDown2 !=null">
           <div1 *ngFor='let sub of form1DropDown2'>
-            <mat-form-field style="width: 20%;" appearance="fill">
+            <mat-form-field style="width: 15%;" appearance="fill">
               <mat-label>Select</mat-label>
                 <mat-select formControlName="form1DropDown2Ctrl" required>
                   <mat-option (onSelectionChange)="form1DropDown2OnSelectionChanged($event)" *ngFor="let option2 of sub.dropDown2" [value]="option2">
@@ -70,18 +70,18 @@
         <div class = "cardContainerDate">
           <mat-form-field appearance="fill">
             <mat-label>Starts</mat-label>
-            <input matInput [matDatepicker]="picker1" (dateChange)="form1StartDateEvent($event)">
+            <input matInput [matDatepicker]="picker1" (dateChange)="form1StartDateEvent($event)" placeholder="MM/DD/YYYY">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Ends By</mat-label>
-            <input matInput [matDatepicker]="picker2" (dateChange)="form1EndDateEvent($event)">
+            <input matInput [matDatepicker]="picker2" (dateChange)="form1EndDateEvent($event)" placeholder="MM/DD/YYYY">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
         </div>
-        <div style="text-align: center;">{{noOfDatesBetween}}</div>
+        <!-- <div style="text-align: center;">{{noOfDatesBetween}}</div> -->
 
         <div  style="text-align: right; color: red;" *ngIf="form1StartTime==null || form1EndTime==null || form1StartTime=='' || form1EndTime==''">* required</div>
         <div style="text-align: center;">Time</div>
@@ -94,10 +94,29 @@
             <input matInput #endTime type="time" (blur)="form1EndTimeEvent(endTime.value)">
           </mat-form-field>
         </div>
-
-
       </mat-card>
 
+      <mat-card class="matCard4 card-container-component">
+        <mat-card-title style="text-align: center;"><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">4</span> Event Title?</mat-card-title>
+        <mat-form-field style="width: 13%;" appearance="fill">
+          <mat-label>Event Title</mat-label>
+          <input matInput formControlName="form1EventTitleCtrl" required placeholder="Event title">
+        </mat-form-field>
+      </mat-card>
+
+      <mat-card class="matCard5 card-container-component">
+        <mat-card-title style="text-align: center;"><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">5</span> What is this Event about?</mat-card-title>
+        <mat-form-field style="width: 13%;" appearance="fill">
+          <mat-label>Event About</mat-label>
+          <textarea matInput formControlName="form1EventAboutCtrl" required placeholder="Event about..."></textarea>
+        </mat-form-field>
+      </mat-card>
+
+      <mat-card class="matCard6 card-container-component">
+        <mat-card-title style="text-align: center;"><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">6</span> Event's picture</mat-card-title>
+        <br><mat-card-content style="text-align: center; font-size: 18px;">Upload main Image</mat-card-content>
+
+      </mat-card>
 
       <button mat-button (click)="form1GoForward(stepper)">Next</button>
 

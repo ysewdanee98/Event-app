@@ -21,7 +21,9 @@ export class CreateEventComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       form1ButtonToggleCtrl: new FormControl('',[Validators.required]),
       form1DropDown1Ctrl: ['', Validators.required],
-      form1DropDown2Ctrl: ['', Validators.required]
+      form1DropDown2Ctrl: ['', Validators.required],
+      form1EventTitleCtrl: ['', Validators.required],
+      form1EventAboutCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
@@ -92,22 +94,22 @@ export class CreateEventComponent implements OnInit {
   form1StartDate: string;
   form1StartDateEvent(event: MatDatepickerInputEvent<Date>) {
     this.form1StartDate = moment(`${event.value}`).format("YYYY-MM-DD");
-    this.getNoOfDatesBetween();
+    // this.getNoOfDatesBetween();
   }
 
   form1EndDate: string;
   form1EndDateEvent(event: MatDatepickerInputEvent<Date>) {
     this.form1EndDate = moment(`${event.value}`).format("YYYY-MM-DD");
-    this.getNoOfDatesBetween();
+    // this.getNoOfDatesBetween();
   }
 
-  noOfDatesBetween: string = "";
-  getNoOfDatesBetween(){
-    let start = new Date(this.form1StartDate);
-    let end = new Date(this.form1EndDate);
-    this.noOfDatesBetween = Math.floor((Date.UTC(end.getFullYear(), end.getMonth(), end.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()) ) /(1000 * 60 * 60 * 24)) +" days";
-    // console.log(Math.floor((Date.UTC(end.getFullYear(), end.getMonth(), end.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()) ) /(1000 * 60 * 60 * 24)));
-  }
+  // noOfDatesBetween: string = "";
+  // getNoOfDatesBetween(){
+  //   let start = new Date(this.form1StartDate);
+  //   let end = new Date(this.form1EndDate);
+  //   this.noOfDatesBetween = Math.floor((Date.UTC(end.getFullYear(), end.getMonth(), end.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()) ) /(1000 * 60 * 60 * 24)) +" days";
+  //   // console.log(Math.floor((Date.UTC(end.getFullYear(), end.getMonth(), end.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()) ) /(1000 * 60 * 60 * 24)));
+  // }
 
   form1StartTime: string;
   form1StartTimeEvent(startT: string){
@@ -136,6 +138,7 @@ export class CreateEventComponent implements OnInit {
           this.form1StartTime == "" || this.form1EndTime == "") {
         console.log("Problem variable");
       } else {
+        // console.log(this.form1.form1EventTitleCtrl.value);
         stepper.next();
       }
     }
