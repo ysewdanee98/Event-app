@@ -1,4 +1,3 @@
-import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -123,8 +122,66 @@ export class CreateEventComponent implements OnInit {
     console.log(this.form1EndTime);
   }
 
+  // eventPicture: File;
+  // urlEventPicture: string;
+  // onFileChanged(event) {
+  //   console.log(event);
+  //   this.eventPicture = event.target.files[0];
+  //   console.log(event.target.files[0]);
+  //   // console.log(this.eventPicture.name);
+  //   if (event.target.files && event.target.files[0]) {
+  //     var reader = new FileReader();
+  //     reader.readAsDataURL(event.target.files[0]); // read file as data url
+  //     reader.onload = (event) => { // called once readAsDataURL is completed
+  //       this.urlEventPicture = event.target.result as string;
+  //       console.log(event.target.result);
+  //     }
+  //   }
+  // }
 
+  form1Files: any[] = [];
 
+  //on file drop handler
+  form1OnFileDropped($event) {
+    this.form1PrepareFilesList($event);
+  }
+
+  //handle file from browsing
+  form1FileBrowseHandler(files) {
+    this.form1PrepareFilesList(files);
+  }
+
+  //Delete file from files list
+  form1DeleteFile(index: number) {
+    this.form1Files.splice(index, 1);
+  }
+
+  //Convert Files list to normal array list
+  form1PrepareFilesList(files: Array<any>) {
+    for (const item of files) {
+      var reader = new FileReader();
+      // console.log(item);
+      reader.readAsDataURL(item); // read file as data url
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        item.picture = event.target.result as string;
+        // console.log(item.picture);
+      }
+      this.form1Files.push(item);
+    }
+     console.log(this.form1Files);
+  }
+
+  //format bytes
+  form1FormatBytes(bytes, decimals) {
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals || 2;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
 
   form1GoForward(stepper: MatStepper){
     if (this.firstFormGroup.invalid) {

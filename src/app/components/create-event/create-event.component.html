@@ -6,6 +6,7 @@
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>General Information</ng-template>
 
+      <!-- MatCard 1 -->
       <mat-card class="matCard1 card-container-component">
         <mat-card-title ><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">1</span> What is the Category of your Event?</mat-card-title>
         <div style="text-align: right; color: red;" *ngIf="form1CatetogorySelected == null">* required</div>
@@ -31,6 +32,7 @@
         </div>
       </mat-card>
 
+      <!-- MatCard 2 -->
       <mat-card class="matCard2 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">2</span> Is this a Private or Public Event?</mat-card-title>
         <div style="text-align: right; color: red;" *ngIf="form1MatButtonToggleSelected.errors?.required">* required</div>
@@ -40,6 +42,7 @@
         </mat-button-toggle-group>
       </mat-card>
 
+      <!-- MatCard 3 -->
       <mat-card class="matCard3 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">3</span> When will this Event be?</mat-card-title>
 
@@ -93,6 +96,7 @@
         </mat-form-field>
       </mat-card>
 
+      <!-- MatCard 4 -->
       <mat-card class="matCard4N5 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">4</span> Event Title?</mat-card-title>
         <mat-form-field appearance="fill">
@@ -101,6 +105,7 @@
         </mat-form-field>
       </mat-card>
 
+      <!-- MatCard 5 -->
       <mat-card class="matCard4N5 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">5</span> What is this Event about?</mat-card-title>
         <mat-form-field appearance="fill">
@@ -109,9 +114,32 @@
         </mat-form-field>
       </mat-card>
 
+      <!-- MatCard 6 -->
       <mat-card class="matCard6 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">6</span> Event's picture</mat-card-title>
-        <br><mat-card-content style="font-size: 18px;">Upload main Image</mat-card-content>
+        <br><mat-card-content style="font-size: 20px;">Upload main Image</mat-card-content>
+
+        <!-- <input type="file" (change)="onFileChanged($event)"><br>
+        <img [src]="urlEventPicture" height="200"> -->
+
+        <div class="container" appDnd (fileDropped)="form1OnFileDropped($event)">
+          <input type="file" #fileDropRef id="fileDropRef" multiple (change)="form1FileBrowseHandler($event.target.files)" />
+          <mat-icon style="font-size: 50px;">cloud_upload</mat-icon>
+          <h3>Drag & drop to upload</h3>
+          <label for="fileDropRef">Select file</label>
+        </div>
+        <div class="files-list">
+          <div class="single-file" *ngFor="let file of form1Files; let i = index">
+            <img [src]="file?.picture" height="50" width="50">
+            <div class="info">
+              <h4 class="name">{{ file?.name }}</h4>
+              <p class="size">{{ form1FormatBytes(file?.size) }}</p>
+            </div>
+            <div class="delete" (click)="form1DeleteFile(i)">
+              <mat-icon style="font-size: 25px;">delete_forever</mat-icon>
+            </div>
+          </div>
+        </div>
 
       </mat-card>
 
