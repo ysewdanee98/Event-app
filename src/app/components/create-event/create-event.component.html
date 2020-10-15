@@ -124,8 +124,9 @@
 
         <div class="container" appDnd (fileDropped)="form1OnFileDropped($event)">
           <input type="file" #fileDropRef id="fileDropRef" multiple (change)="form1FileBrowseHandler($event.target.files)" />
-          <mat-icon style="font-size: 50px;">cloud_upload</mat-icon>
+          <mat-icon style="font-size: 50px; color: SkyBlue;">cloud_upload</mat-icon>
           <h3>Drag & drop to upload</h3>
+          <br>
           <label for="fileDropRef">Select file</label>
         </div>
         <div class="files-list">
