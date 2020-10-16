@@ -210,6 +210,6 @@ export class CreateEventComponent implements OnInit {
         stepper.next();
       }
     }
-}
+  }
 
 }

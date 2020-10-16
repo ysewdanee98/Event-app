@@ -36,7 +36,7 @@
       <mat-card class="matCard2 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">2</span> Is this a Private or Public Event?</mat-card-title>
         <div style="text-align: right; color: red;" *ngIf="form1MatButtonToggleSelected.errors?.required && form1ShowError == true">* required</div>
-        <mat-button-toggle-group style="padding: 5px; border-radius: 100px; background-color:Azure;" formControlName="form1ButtonToggleCtrl" required [class.is-invalid]="form1MatButtonToggleSelected.invalid" class="form-control">
+        <mat-button-toggle-group style="padding: 5px; border-radius: 50px; background-color:Azure;" formControlName="form1ButtonToggleCtrl" required [class.is-invalid]="form1MatButtonToggleSelected.invalid" class="form-control">
           <mat-button-toggle style="border-top-left-radius: 75px 100px; border-bottom-left-radius: 75px 100px;" value="Private" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Private'">&nbsp;&nbsp; Private &nbsp;&nbsp;</mat-button-toggle>
           <mat-button-toggle style="border-top-right-radius: 75px 100px; border-bottom-right-radius: 75px 100px;" value="Public" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Public'">&nbsp;&nbsp; Public &nbsp;&nbsp;</mat-button-toggle>
         </mat-button-toggle-group>
@@ -146,10 +146,13 @@
             </div>
           </div>
         </div>
-
       </mat-card>
 
-      <button mat-button (click)="form1GoForward(stepper)">Next</button>
+      <div style="text-align: right;">
+        <div style="padding: 5px; border-radius: 50px; background-color:Azure; text-align: center; width: 100px; margin: 0 auto; margin-right: 5%;">
+          <button mat-button style="border-radius: 50px; background-color:Blue; color: white; font-size: 18px; padding-left: 25px; padding-right: 25px;" (click)="form1GoForward(stepper)">Next</button>
+        </div>
+      </div>
 
     </form>
   </mat-step>
