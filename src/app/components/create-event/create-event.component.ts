@@ -31,6 +31,7 @@ export class CreateEventComponent implements OnInit {
       thirdCtrl: ['', Validators.required]
     });
     console.log(this.form1Categories);
+    this.form1ShowError = false;
   }
 
   get form1() { return this.firstFormGroup.controls; }
@@ -156,17 +157,21 @@ export class CreateEventComponent implements OnInit {
     this.form1Files.splice(index, 1);
   }
 
+  form1FileSize: number = 4;
+
   //Convert Files list to normal array list
   form1PrepareFilesList(files: Array<any>) {
     for (const item of files) {
-      var reader = new FileReader();
-      // console.log(item);
-      reader.readAsDataURL(item); // read file as data url
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        item.picture = event.target.result as string;
-        // console.log(item.picture);
+      if (this.form1Files.length < this.form1FileSize) {
+        var reader = new FileReader();
+        // console.log(item);
+        reader.readAsDataURL(item); // read file as data url
+        reader.onload = (event) => { // called once readAsDataURL is completed
+          item.picture = event.target.result as string;
+          // console.log(item.picture);
+        }
+        this.form1Files.push(item);
       }
-      this.form1Files.push(item);
     }
      console.log(this.form1Files);
   }
@@ -183,17 +188,23 @@ export class CreateEventComponent implements OnInit {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
+  form1ShowError: boolean;
   form1GoForward(stepper: MatStepper){
     if (this.firstFormGroup.invalid) {
       console.log("Invalid");
+      this.form1ShowError = true;
+      console.log(this.form1ShowError);
     } else {
       if (this.form1CatetogorySelected == null || this.form1SubCategorySelected == null ||
           this.form1StartDate == null || this.form1StartDate == "Invalid date" ||
           this.form1EndDate == null || this.form1EndDate == "Invalid date" ||
           this.form1StartDate > this.form1EndDate ||
           this.form1StartTime == null || this.form1EndTime == null ||
-          this.form1StartTime == "" || this.form1EndTime == "") {
-        console.log("Problem variable");
+          this.form1StartTime == "" || this.form1EndTime == "" ||
+          this.form1Files.length == 0) {
+            this.form1ShowError = true;
+            console.log(this.form1ShowError);
+            console.log("Problem variable");
       } else {
         // console.log(this.form1.form1EventTitleCtrl.value);
         stepper.next();

@@ -6,6 +6,10 @@
   border: 1px solid #339FFF;
 }
 
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+
 .dotNumber {
   padding: 3px;
   // background-color: #bbb;
@@ -45,6 +49,7 @@
     width: 75px;
     background-color:Azure;
     margin: 5px;
+    border-radius: 50px;
     &.selected{
       background-color: blue;
       color: white;
@@ -62,7 +67,6 @@
   mat-icon {
     font-size: 50px;
     display: flex;
-    align-items: center;
     padding: 13px;
     color: SkyBlue;
   }
@@ -119,9 +123,9 @@
 .matCard3 {
   text-align: center;
 
-  mat-form-field {
-    // background: blue;
-  }
+  // mat-form-field {
+  //   background: blue;
+  // }
 
 }
 

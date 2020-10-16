@@ -9,19 +9,19 @@
       <!-- MatCard 1 -->
       <mat-card class="matCard1 card-container-component">
         <mat-card-title ><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">1</span> What is the Category of your Event?</mat-card-title>
-        <div style="text-align: right; color: red;" *ngIf="form1CatetogorySelected == null">* required</div>
+        <div style="text-align: right; color: red;" *ngIf="form1CatetogorySelected == null && form1ShowError == true">* required</div>
         <div class = "cardContainerCategory">
           <div class="card" *ngFor='let category of form1Categories'>
-            <button mat-icon-button class="matIconButtonCategory" [class.selected]="form1CatetogorySelected==category.category" (click)="form1CategoryChosen(category.category)">
+            <mat-button class="matIconButtonCategory" [class.selected]="form1CatetogorySelected==category.category" (click)="form1CategoryChosen(category.category)">
               <mat-icon>{{category.icon}}</mat-icon>
-            </button>
+            </mat-button>
             {{category.category}}
           </div>
         </div>
         <br>
         <div *ngIf= "form1SubCategories !=null">
           <mat-card-content style="font-size: 20px;">Select Subcategory</mat-card-content>
-          <div style="text-align: right; color: red;" *ngIf="form1SubCategorySelected == null">* required</div>
+          <div style="text-align: right; color: red;" *ngIf="form1SubCategorySelected == null && form1ShowError == true">* required</div>
             <div class = "cardContainerSubCategory" *ngFor='let sub of form1SubCategories'>
               <mat-chip-list>
                 <div class="card" *ngFor="let subCate of sub.subCategory">
@@ -35,7 +35,7 @@
       <!-- MatCard 2 -->
       <mat-card class="matCard2 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">2</span> Is this a Private or Public Event?</mat-card-title>
-        <div style="text-align: right; color: red;" *ngIf="form1MatButtonToggleSelected.errors?.required">* required</div>
+        <div style="text-align: right; color: red;" *ngIf="form1MatButtonToggleSelected.errors?.required && form1ShowError == true">* required</div>
         <mat-button-toggle-group style="padding: 5px; border-radius: 100px; background-color:Azure;" formControlName="form1ButtonToggleCtrl" required [class.is-invalid]="form1MatButtonToggleSelected.invalid" class="form-control">
           <mat-button-toggle style="border-top-left-radius: 75px 100px; border-bottom-left-radius: 75px 100px;" value="Private" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Private'">&nbsp;&nbsp; Private &nbsp;&nbsp;</mat-button-toggle>
           <mat-button-toggle style="border-top-right-radius: 75px 100px; border-bottom-right-radius: 75px 100px;" value="Public" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Public'">&nbsp;&nbsp; Public &nbsp;&nbsp;</mat-button-toggle>
@@ -46,14 +46,16 @@
       <mat-card class="matCard3 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">3</span> When will this Event be?</mat-card-title>
 
-        <mat-form-field style="width: 20%;" appearance="fill">
-          <mat-label>Select</mat-label>
-          <mat-select formControlName="form1DropDown1Ctrl" required>
-            <mat-option (onSelectionChange)="form1DropDown1OnSelectionChanged($event)" *ngFor="let option1 of form1DropDown1" [value]="option1.value">
-              {{option1.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div>
+          <mat-form-field style="width: 20%;" appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select formControlName="form1DropDown1Ctrl" required>
+              <mat-option (onSelectionChange)="form1DropDown1OnSelectionChanged($event)" *ngFor="let option1 of form1DropDown1" [value]="option1.value">
+                {{option1.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
         <div *ngIf= "form1DropDown2 !=null">
           <div1 *ngFor='let sub of form1DropDown2'>
@@ -68,8 +70,8 @@
           </div1>
         </div>
 
-        <div  style="text-align: right; color: red;" *ngIf="form1StartDate==null || form1EndDate==null ">* required</div>
-        <div  style="text-align: right; color: red;" *ngIf="form1StartDate=='Invalid date'|| form1EndDate=='Invalid date' || form1StartDate > form1EndDate">* invalid date</div>
+        <div style="text-align: right; color: red;" *ngIf="(form1StartDate==null || form1EndDate==null) && form1ShowError == true">* required</div>
+        <div style="text-align: right; color: red;" *ngIf="(form1StartDate=='Invalid date'|| form1EndDate=='Invalid date' || form1StartDate > form1EndDate)">* invalid date</div>
           <mat-form-field appearance="fill">
             <mat-label>Starts</mat-label>
             <input matInput [matDatepicker]="picker1" (dateChange)="form1StartDateEvent($event)" placeholder="MM/DD/YYYY">
@@ -85,7 +87,7 @@
           </mat-form-field>
         <!-- <div>{{noOfDatesBetween}}</div> -->
 
-        <div style="text-align: right; color: red;" *ngIf="form1StartTime==null || form1EndTime==null || form1StartTime=='' || form1EndTime==''">* required</div>
+        <div style="text-align: right; color: red;" *ngIf="(form1StartTime==null || form1EndTime==null || form1StartTime=='' || form1EndTime=='') && form1ShowError == true">* required</div>
         <div style="text-align: center; margin-left: 37%; margin-right: 63%;">Time</div>
         <mat-form-field>
           <input matInput #startTime type="time" (blur)="form1StartTimeEvent(startTime.value)">
@@ -117,7 +119,10 @@
       <!-- MatCard 6 -->
       <mat-card class="matCard6 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">6</span> Event's picture</mat-card-title>
-        <br><mat-card-content style="font-size: 20px;">Upload main Image</mat-card-content>
+        <div style="text-align: right;">Maximun: {{form1FileSize}} images</div>
+        <div style="text-align: right;">Selected: {{form1Files.length}} images</div>
+        <mat-card-content style="font-size: 20px;">Upload main Image</mat-card-content>
+        <div style="text-align: right; color: red;" *ngIf="form1Files.length == 0 && form1ShowError == true">* required</div>
 
         <!-- <input type="file" (change)="onFileChanged($event)"><br>
         <img [src]="urlEventPicture" height="200"> -->
