@@ -7,7 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatNativeDateModule } from '@angular/material/core';
+// import { MatNativeDateModule } from '@angular/material/core';
 import { DemoMaterialModuleModule } from '../demo-material-module/demo-material-module.module';
 import { HomeComponent } from './components/home/home.component';
 import { CreateEventComponent } from './components/create-event/create-event.component';
@@ -28,7 +28,7 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     HttpClientModule,
     DemoMaterialModuleModule,
-    MatNativeDateModule,
+    // MatNativeDateModule,
     ReactiveFormsModule
   ],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, DatePipe],

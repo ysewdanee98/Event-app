@@ -50,6 +50,7 @@
     background-color:Azure;
     margin: 5px;
     border-radius: 50px;
+    cursor: pointer;
     &.selected{
       background-color: blue;
       color: white;
@@ -92,6 +93,7 @@
     padding: 5px;
     font-size: 15px;
     color: blue;
+    cursor: pointer;
     &.selected{
       background-color: blue;
       color: white;
@@ -215,7 +217,16 @@
   text-align: center;
 
   mat-form-field {
-    background: blue;
+    // background: blue;
+  }
+
+}
+
+.matCard8 {
+  text-align: center;
+
+  mat-form-field {
+    // background: blue;
   }
 
 }

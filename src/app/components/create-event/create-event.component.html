@@ -66,26 +66,25 @@
           </mat-form-field>
         </div>
 
-
         <div style="text-align: right; color: red;" *ngIf="(form1StartDate==null || form1EndDate==null) && form1ShowError == true">* required</div>
         <div style="text-align: right; color: red;" *ngIf="(form1StartDate=='Invalid date'|| form1EndDate=='Invalid date' || form1StartDate > form1EndDate)">* invalid date</div>
           <mat-form-field appearance="fill">
             <mat-label>Starts</mat-label>
             <input matInput [matDatepicker]="picker1" (dateChange)="form1StartDateEvent($event)" placeholder="MM/DD/YYYY">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker-toggle style="color: skyblue;" matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <mat-form-field appearance="fill">
             <mat-label>Ends By</mat-label>
             <input matInput [matDatepicker]="picker2" (dateChange)="form1EndDateEvent($event)" placeholder="MM/DD/YYYY">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker-toggle style="color: skyblue;" matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
         <!-- <div>{{noOfDatesBetween}}</div> -->
 
         <div style="text-align: right; color: red;" *ngIf="(form1StartTime==null || form1EndTime==null || form1StartTime=='' || form1EndTime=='') && form1ShowError == true">* required</div>
-        <div style="text-align: center; margin-left: 37%; margin-right: 63%;">Time</div>
+        <div style="margin-left: 37%; margin-right: 63%;">Time</div>
         <mat-form-field>
           <input matInput #startTime type="time" (blur)="form1StartTimeEvent(startTime.value)">
         </mat-form-field>
@@ -163,6 +162,42 @@
       <mat-card class="matCard7 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">7</span> What is location?</mat-card-title>
 
+        <div style="text-align: right; color: red;" *ngIf="this.form2DropDown1CitySelected == null && (this.form2.form2AddressCtrl.value == '' || this.form2.form2AddressCtrl.value == null) && form2ShowError == true">* required</div>
+        <div style="text-align: right; color: red;" *ngIf="this.form2DropDown1CitySelected != null && this.form2DropDown2VenueSelected == null && form2ShowError == true">* required</div>
+        <div>
+          <mat-form-field style="width: 20%;" appearance="fill">
+            <mat-label>Select location</mat-label>
+            <mat-select>
+              <mat-option (onSelectionChange)="form2DropDown1CityOnSelectionChanged($event)">Select location</mat-option>
+              <mat-option (onSelectionChange)="form2DropDown1CityOnSelectionChanged($event)" *ngFor="let cities of form2Cities" [value]="cities.city">
+                {{cities.city}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <mat-form-field style="width: 20%;" appearance="fill" *ngFor='let city of form2Venues'>
+            <mat-label>Select venue</mat-label>
+            <mat-select>
+              <mat-option (onSelectionChange)="form2DropDown2VenueOnSelectionChanged($event)">Select venue</mat-option>
+              <mat-option (onSelectionChange)="form2DropDown2VenueOnSelectionChanged($event)" *ngFor="let venue of city.venues" [value]="venue">
+                {{venue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <div style="margin-left: 25%; margin-right: 57%;">Or type address if you are not find any</div>
+          <mat-form-field style="width: 50%;" appearance="fill">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="form2AddressCtrl" placeholder="Address">
+          </mat-form-field>
+        </div>
+      </mat-card>
+
+      <!-- MatCard 8 -->
+      <mat-card class="matCard8 card-container-component">
+        <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">8</span> What is the price?</mat-card-title>
+
       </mat-card>
 
 
@@ -170,7 +205,7 @@
 
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button (click)="form2GoForward(stepper)">Next</button>
       </div>
 
     </form>

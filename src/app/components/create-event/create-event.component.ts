@@ -25,7 +25,7 @@ export class CreateEventComponent implements OnInit {
       form1EventAboutCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      form2AddressCtrl: []
     });
     this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: ['', Validators.required]
@@ -43,7 +43,7 @@ export class CreateEventComponent implements OnInit {
     { "category": "Parties & Nightlife", "icon": "cake", "subCategory": ['Dance Clubs', 'Live Music Venue', 'Sports-Themed Nightclubs‎', 'Dueling Piano Bars‎', 'Comedy Clubs‎', 'Adult Clubs‎'] },
     { "category": "Sports & Welness", "icon": "sports", "subCategory": ['Ball Sports', 'Endurance and Track', 'Combat and Strength Sports', 'Man Best Friends', 'Water, Ice and Snow', 'Gymnastics'] },
     { "category": "Networking & Classess", "icon": "laptop_windows", "subCategory": ['Industry-Specific Events', 'Round Tables', 'Work Breakfasts', 'After-Hours Events', 'Online Networking'] }
-];
+  ];
 
   form1CatetogorySelected: string = null;
   form1SubCategories: any = null;
@@ -84,7 +84,7 @@ export class CreateEventComponent implements OnInit {
     }
   }
 
-  form1DropDown2: {dropDown2}[] = []
+  form1DropDown2: any = []
   form1DropDown2Selected: string = null;
   form1DropDown2OnSelectionChanged(event){
     if(event.isUserInput){
@@ -223,6 +223,69 @@ export class CreateEventComponent implements OnInit {
       } else {
         // console.log(this.form1.form1EventTitleCtrl.value);
         this.form1ShowError = false;
+        stepper.next();
+      }
+    }
+  }
+
+  get form2() { return this.secondFormGroup.controls; }
+
+  form2Cities: { city: string, venues: string[] }[] = [
+    { "city": "Music", "venues": ['Alternative Music', 'Blues', 'Classical Music', 'Country Music', 'Dance Music', 'Electronic Music', 'Hip Hop / RAP', 'Latin Music', 'Jazz', 'Opera', 'POP'] }
+  ];
+
+  form2DropDown1CitySelected: string = null;
+  form2DropDown1CityOnSelectionChanged(event){
+    if(event.isUserInput){
+      // console.log(event.source.viewValue, event.source.selected);
+      this.form2DropDown1CitySelected = event.source.value;
+      if (this.form2DropDown1CitySelected == undefined) {
+        this.form2DropDown1CitySelected = null;
+      }
+      console.log(this.form2DropDown1CitySelected);
+      this.form2Venues = [];
+      this.form2DropDown2VenueSelected = null;
+      this.form2Venues = this.form2Cities.filter(e => e.city == this.form2DropDown1CitySelected);
+      console.log(this.form2Venues);
+    }
+  }
+
+  form2Venues: any = []
+  form2DropDown2VenueSelected: string = null;
+  form2DropDown2VenueOnSelectionChanged(event){
+    if(event.isUserInput){
+      this.form2DropDown2VenueSelected = event.source.value;
+      if (this.form2DropDown2VenueSelected == undefined) {
+        this.form2DropDown2VenueSelected = null;
+      }
+      console.log(this.form2DropDown2VenueSelected);
+    }
+  }
+
+
+
+
+
+
+
+  form2ShowError: boolean;
+  form2GoForward(stepper: MatStepper){
+    if (this.secondFormGroup.invalid) {
+      console.log("Invalid");
+      this.form2ShowError = true;
+      console.log(this.form2ShowError);
+    } else {
+      if (this.form2DropDown1CitySelected == null && (this.form2.form2AddressCtrl.value == "" || this.form2.form2AddressCtrl.value == null)) {
+          this.form2ShowError = true;
+          console.log(this.form2ShowError);
+          console.log("Problem variable");
+      } else if(this.form2DropDown1CitySelected != null && this.form2DropDown2VenueSelected == null) {
+          this.form2ShowError = true;
+          console.log(this.form2ShowError);
+          console.log("Problem variable");
+      } else {
+        // console.log(this.form1.form1EventTitleCtrl.value);
+        this.form2ShowError = false;
         stepper.next();
       }
     }
