@@ -1,18 +1,15 @@
-<p>create-event works!</p>
-
-<mat-horizontal-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper [linear]="false" #stepper> <!-- Linear false for tested, Should be true after -->
 
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>General Information</ng-template>
-
       <!-- MatCard 1 -->
       <mat-card class="matCard1 card-container-component">
         <mat-card-title ><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">1</span> What is the Category of your Event?</mat-card-title>
         <div style="text-align: right; color: red;" *ngIf="form1CatetogorySelected == null && form1ShowError == true">* required</div>
         <div class = "cardContainerCategory">
           <div class="card" *ngFor='let category of form1Categories'>
-            <mat-button class="matIconButtonCategory" [class.selected]="form1CatetogorySelected==category.category" (click)="form1CategoryChosen(category.category)">
+            <mat-button mat-icon-button class="matIconButtonCategory" [class.selected]="form1CatetogorySelected==category.category" (click)="form1CategoryChosen(category.category)">
               <mat-icon>{{category.icon}}</mat-icon>
             </mat-button>
             {{category.category}}
@@ -46,6 +43,7 @@
       <mat-card class="matCard3 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">3</span> When will this Event be?</mat-card-title>
 
+        <div style="text-align: right; color: red;" *ngIf="form1DropDown2Selected==null && form1ShowError == true">* required</div> <!-- For Drop Down 2 -->
         <div>
           <mat-form-field style="width: 20%;" appearance="fill">
             <mat-label>Select</mat-label>
@@ -57,18 +55,17 @@
           </mat-form-field>
         </div>
 
-        <div *ngIf= "form1DropDown2 !=null">
-          <div1 *ngFor='let sub of form1DropDown2'>
-            <mat-form-field style="width: 20%;" appearance="fill">
-              <mat-label>Select</mat-label>
-                <mat-select formControlName="form1DropDown2Ctrl" required>
-                  <mat-option (onSelectionChange)="form1DropDown2OnSelectionChanged($event)" *ngFor="let option2 of sub.dropDown2" [value]="option2">
-                    {{option2}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-          </div1>
+        <div>
+          <mat-form-field style="width: 20%;" appearance="fill" *ngFor='let sub of form1DropDown2'>
+            <mat-label>Select</mat-label>
+            <mat-select formControlName="form1DropDown2Ctrl" required>
+              <mat-option (onSelectionChange)="form1DropDown2OnSelectionChanged($event)" *ngFor="let option2 of sub.dropDown2" [value]="option2">
+                {{option2}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
+
 
         <div style="text-align: right; color: red;" *ngIf="(form1StartDate==null || form1EndDate==null) && form1ShowError == true">* required</div>
         <div style="text-align: right; color: red;" *ngIf="(form1StartDate=='Invalid date'|| form1EndDate=='Invalid date' || form1StartDate > form1EndDate)">* invalid date</div>
@@ -149,22 +146,33 @@
       </mat-card>
 
       <div style="text-align: right;">
-        <div style="padding: 5px; border-radius: 50px; background-color:Azure; text-align: center; width: 100px; margin: 0 auto; margin-right: 5%;">
-          <button mat-button style="border-radius: 50px; background-color:Blue; color: white; font-size: 18px; padding-left: 25px; padding-right: 25px;" (click)="form1GoForward(stepper)">Next</button>
+        <div style="color: red; padding-bottom: 10px; margin-right: 5%;" *ngIf="form1ShowError == true">
+          <b>Review form and try again.</b>
+        </div>
+        <div style="padding: 5px; border-radius: 50px; background-color:SkyBlue; text-align: center; width: 100px; margin: 0 auto; margin-right: 5%;">
+          <button mat-button style="border-radius: 50px; background-color:Blue; color: white; font-size: 18px; padding-left: 30px; padding-right: 30px;" (click)="form1GoForward(stepper)">Next</button>
         </div>
       </div>
-
     </form>
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Pricing and Location</ng-template>
-      <!-- <div><input matInput formControlName="secondCtrl"  [(ngModel)]="rating2" placeholder="Ex. 1 Main St, New York, NY" required></div><br> -->
+      <!-- MatCard 7 -->
+      <mat-card class="matCard7 card-container-component">
+        <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">7</span> What is location?</mat-card-title>
+
+      </mat-card>
+
+
+
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
+
     </form>
   </mat-step>
 

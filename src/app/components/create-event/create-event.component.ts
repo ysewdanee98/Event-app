@@ -1,8 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatStepper } from '@angular/material/stepper';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-create-event',
@@ -14,7 +14,7 @@ export class CreateEventComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder, public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -72,17 +72,19 @@ export class CreateEventComponent implements OnInit {
   ];
 
   form1DropDown1Selected: string = null;
-  form1DropDown2: any = null;
   form1DropDown1OnSelectionChanged(event){
     if(event.isUserInput){
       // console.log(event.source.viewValue, event.source.selected);
       this.form1DropDown1Selected = event.source.viewValue;
       console.log(this.form1DropDown1Selected);
+      this.form1DropDown2 = [];
+      this.form1DropDown2Selected = null;
       this.form1DropDown2 = this.form1DropDown1.filter(e => e.viewValue == this.form1DropDown1Selected);
       console.log(this.form1DropDown2);
     }
   }
 
+  form1DropDown2: {dropDown2}[] = []
   form1DropDown2Selected: string = null;
   form1DropDown2OnSelectionChanged(event){
     if(event.isUserInput){
@@ -93,13 +95,25 @@ export class CreateEventComponent implements OnInit {
 
   form1StartDate: string;
   form1StartDateEvent(event: MatDatepickerInputEvent<Date>) {
-    this.form1StartDate = moment(`${event.value}`).format("YYYY-MM-DD");
+    // console.log(`${event.value}`);
+    if (`${event.value}` == 'null') {
+      this.form1StartDate ="Invalid date";
+    } else {
+      this.form1StartDate =this.datepipe.transform(`${event.value}`, 'yyyy-MM-dd');
+    }
+    console.log(this.form1StartDate);
     // this.getNoOfDatesBetween();
   }
 
   form1EndDate: string;
   form1EndDateEvent(event: MatDatepickerInputEvent<Date>) {
-    this.form1EndDate = moment(`${event.value}`).format("YYYY-MM-DD");
+    // console.log(`${event.value}`);
+    if (`${event.value}` == 'null') {
+      this.form1EndDate ="Invalid date";
+    } else {
+      this.form1EndDate =this.datepipe.transform(`${event.value}`, 'yyyy-MM-dd');
+    }
+    console.log(this.form1EndDate);
     // this.getNoOfDatesBetween();
   }
 
@@ -164,13 +178,13 @@ export class CreateEventComponent implements OnInit {
     for (const item of files) {
       if (this.form1Files.length < this.form1FileSize) {
         var reader = new FileReader();
-        // console.log(item);
-        reader.readAsDataURL(item); // read file as data url
-        reader.onload = (event) => { // called once readAsDataURL is completed
-          item.picture = event.target.result as string;
-          // console.log(item.picture);
-        }
-        this.form1Files.push(item);
+      // console.log(item);
+      reader.readAsDataURL(item); // read file as data url
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        item.picture = event.target.result as string;
+        // console.log(item.picture);
+      }
+      this.form1Files.push(item);
       }
     }
      console.log(this.form1Files);
@@ -196,6 +210,7 @@ export class CreateEventComponent implements OnInit {
       console.log(this.form1ShowError);
     } else {
       if (this.form1CatetogorySelected == null || this.form1SubCategorySelected == null ||
+          this.form1DropDown2Selected == null ||
           this.form1StartDate == null || this.form1StartDate == "Invalid date" ||
           this.form1EndDate == null || this.form1EndDate == "Invalid date" ||
           this.form1StartDate > this.form1EndDate ||
@@ -207,6 +222,7 @@ export class CreateEventComponent implements OnInit {
             console.log("Problem variable");
       } else {
         // console.log(this.form1.form1EventTitleCtrl.value);
+        this.form1ShowError = false;
         stepper.next();
       }
     }

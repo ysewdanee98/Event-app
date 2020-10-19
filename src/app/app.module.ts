@@ -12,6 +12,7 @@ import { DemoMaterialModuleModule } from '../demo-material-module/demo-material-
 import { HomeComponent } from './components/home/home.component';
 import { CreateEventComponent } from './components/create-event/create-event.component';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
     MatNativeDateModule,
     ReactiveFormsModule
   ],
-  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
