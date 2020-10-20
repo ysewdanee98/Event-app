@@ -155,6 +155,7 @@
     </form>
   </mat-step>
 
+
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Pricing and Location</ng-template>
@@ -217,8 +218,8 @@
           </div>
           <br>
           <div style="text-align: right; color: red;" *ngIf="(form2TicketNameError == true || form2PriceError == true || form2CurrencyError == true) && form2ShowError == true">* something wrong</div>
-          <table style="width:100%;">
-            <tr>
+          <table class="center">
+            <tr style="text-align: left;">
               <th>Ticket Name</th>
               <th>Price</th>
               <th>Currency</th>
@@ -228,13 +229,13 @@
                 <mat-form-field appearance="fill">
                   <mat-label>Ticket name</mat-label>
                   <input matInput placeholder="Ticket name" [(value)]="items.ticketName" (blur)="form2TicketNameInputOnBlur($event, items)" required>
-                </mat-form-field>
+                </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </td>
               <td>
                 <mat-form-field appearance="fill">
                   <mat-label>Price</mat-label>
                   <input matInput placeholder="Price" [(value)]="items.price" (blur)="form2PriceInputOnBlur($event, items)" required>
-                </mat-form-field>
+                </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </td>
               <td>
                 <mat-form-field appearance="fill">
@@ -245,28 +246,43 @@
                       {{currencies.currency}}
                     </mat-option>
                   </mat-select>
-                </mat-form-field>
+                </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </td>
             </tr>
           </table>
         </div>
       </mat-card>
 
-
-
-
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="form2GoForward(stepper)">Next</button>
+      <div style="text-align: right;">
+        <div style="color: red; padding-bottom: 10px; margin-right: 5%;" *ngIf="form2ShowError == true">
+          <b>Review form and try again.</b>
+        </div>
       </div>
 
+      <div class="form2BackNext">
+        <div style="padding: 5px; border-radius: 50px; text-align: center; width: 100px; margin: 0 auto; margin-left: 5%;">
+          <button mat-button style="border-radius: 50px; color: blue; font-size: 18px; padding-left: 30px; padding-right: 30px;" matStepperPrevious>Back</button>
+        </div>
+        <div style="padding: 5px; border-radius: 50px; background-color:SkyBlue; text-align: center; width: 100px; margin: 0 auto; margin-right: 5%;">
+          <button mat-button style="border-radius: 50px; background-color:Blue; color: white; font-size: 18px; padding-left: 30px; padding-right: 30px;" (click)="form2GoForward(stepper)">Next</button>
+        </div>
+      </div>
     </form>
   </mat-step>
 
+  
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Additional Information</ng-template>
-      <!-- <div><input matInput formControlName="thirdCtrl"  [(ngModel)]="rating3" placeholder="Telphone No." required></div><br> -->
+      <!-- MatCard 9 -->
+      <mat-card class="matCard9 card-container-component">
+        <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">9</span> Any restrictions in regards of your audience?</mat-card-title>
+
+
+      </mat-card>
+
+
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>

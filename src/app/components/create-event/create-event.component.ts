@@ -376,12 +376,6 @@ export class CreateEventComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
   form2ShowError: boolean;
   form2GoForward(stepper: MatStepper){
     if (this.secondFormGroup.invalid) {
