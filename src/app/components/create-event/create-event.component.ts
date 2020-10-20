@@ -25,7 +25,8 @@ export class CreateEventComponent implements OnInit {
       form1EventAboutCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      form2AddressCtrl: []
+      form2AddressCtrl: [],
+      form2ButtonTogglePriceCtrl: new FormControl('',[Validators.required])
     });
     this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: ['', Validators.required]
@@ -260,6 +261,53 @@ export class CreateEventComponent implements OnInit {
       }
       console.log(this.form2DropDown2VenueSelected);
     }
+  }
+
+  get form2MatButtonTogglePriceSelected(){
+    return this.secondFormGroup.get('form2ButtonTogglePriceCtrl');
+  }
+
+  noOfPricing: number = 0;
+  form2OperationMatButtonTogglePrice(){
+    if (this.form2.form2ButtonTogglePriceCtrl.value=='Free') {
+      this.noOfPricing = 0;
+      this.form2PricingItems = [];
+    } else if (this.form2.form2ButtonTogglePriceCtrl.value=='Paid'){
+      this.noOfPricing = 1;
+      const form2PriceItemDetails: any = [];
+      form2PriceItemDetails.index = 0;
+      form2PriceItemDetails.ticketName = "";
+      form2PriceItemDetails.price = 0;
+      form2PriceItemDetails.currency = "";
+      this.form2PricingItems.push(form2PriceItemDetails);
+    }
+    console.log(this.noOfPricing);
+    console.log(this.form2PricingItems);
+  }
+
+  form2PricingItems: {index: number, ticketName: string, price: number, currency: string}[] = [];
+
+  form2OperationNoofPricing(getOperation: string){
+    if (getOperation == "Minus") {
+      if (this.noOfPricing == 1) {
+        this.noOfPricing = 1;
+      } else {
+        this.noOfPricing = this.noOfPricing -1;
+      }
+    } else if (getOperation == "Add") {
+      this.noOfPricing = this.noOfPricing +1;
+    }
+    this.form2PricingItems = [];
+    console.log(this.noOfPricing);
+    for(let i=0;i<this.noOfPricing;i++){
+      const form2PriceItemDetails: any = [];
+      form2PriceItemDetails.index = i;
+      form2PriceItemDetails.ticketName = "";
+      form2PriceItemDetails.price = 0;
+      form2PriceItemDetails.currency = "";
+      this.form2PricingItems.push(form2PriceItemDetails);
+    }
+    console.log(this.form2PricingItems);
   }
 
 

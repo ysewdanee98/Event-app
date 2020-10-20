@@ -198,6 +198,36 @@
       <mat-card class="matCard8 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">8</span> What is the price?</mat-card-title>
 
+        <div style="text-align: right; color: red;" *ngIf="form2MatButtonTogglePriceSelected.errors?.required && form2ShowError == true">* required</div>
+        <mat-button-toggle-group style="padding: 5px; border-radius: 50px; background-color:Azure;" formControlName="form2ButtonTogglePriceCtrl" required [class.is-invalid]="form2MatButtonTogglePriceSelected.invalid" class="form-control">
+          <mat-button-toggle style="border-top-left-radius: 75px 100px; border-bottom-left-radius: 75px 100px;" (click)="form2OperationMatButtonTogglePrice()" value="Free" class="matButtonToggle" [class.selected]="form2.form2ButtonTogglePriceCtrl.value=='Free'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Free &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-button-toggle>
+          <mat-button-toggle style="border-top-right-radius: 75px 100px; border-bottom-right-radius: 75px 100px;" (click)="form2OperationMatButtonTogglePrice()" value="Paid" class="matButtonToggle" [class.selected]="form2.form2ButtonTogglePriceCtrl.value=='Paid'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Paid &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-button-toggle>
+        </mat-button-toggle-group>
+
+        <div *ngIf="form2.form2ButtonTogglePriceCtrl.value=='Paid'"><br>
+          <mat-card-content style="font-size: 20px;">How many different pricing?</mat-card-content>
+          <div class = "containerPricing">
+            <mat-button mat-icon-button style="color: white; cursor: pointer;" (click)="form2OperationNoofPricing('Minus')">
+              &nbsp;&nbsp;<mat-icon>remove</mat-icon>&nbsp;&nbsp;
+            </mat-button>
+            <input matInput style="background-color: white; width: 70px; height: 40px;" readonly [value]="noOfPricing">
+            <mat-button mat-icon-button style="color: white; cursor: pointer;" (click)="form2OperationNoofPricing('Add')">
+              &nbsp;&nbsp;<mat-icon>add</mat-icon>&nbsp;&nbsp;
+            </mat-button>
+          </div>
+          <table style="width:100%; border: 1px solid black">
+            <tr>
+              <th>Ticket Name</th>
+              <th>Price</th>
+              <th>Currency</th>
+            </tr>
+            <tr *ngFor="let file of form2PricingItems">
+              <td>Jill</td>
+              <td>Smith</td>
+              <td>50</td>
+            </tr>
+          </table>
+        </div>
       </mat-card>
 
 

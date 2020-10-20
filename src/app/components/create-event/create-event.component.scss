@@ -229,4 +229,23 @@
     // background: blue;
   }
 
+  .matButtonToggle {
+    background-color:Azure;
+    padding: 1px;
+    font-size: 15px;
+    color: blue;
+    &.selected{
+      background-color: blue;
+      color: white;
+    }
+  }
+
+  .containerPricing {
+    background-color: blue;
+    margin: auto;
+    width: 175px;
+    padding: 2px;
+    border-radius: 50px;
+  }
+
 }
