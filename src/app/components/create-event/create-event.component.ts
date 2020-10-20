@@ -271,14 +271,21 @@ export class CreateEventComponent implements OnInit {
     if (this.form2.form2ButtonTogglePriceCtrl.value=='Free') {
       this.noOfPricing = 0;
       this.form2PricingItems = [];
+      this.form2TicketNameError = false;
+      this.form2PriceError = false;
+      this.form2CurrencyError = false;
     } else if (this.form2.form2ButtonTogglePriceCtrl.value=='Paid'){
       this.noOfPricing = 1;
+      this.form2PricingItems = [];
       const form2PriceItemDetails: any = [];
       form2PriceItemDetails.index = this.form2PricingItems.length;
       form2PriceItemDetails.ticketName = "";
       form2PriceItemDetails.price = 0;
       form2PriceItemDetails.currency = "";
       this.form2PricingItems.push(form2PriceItemDetails);
+      this.form2TicketNameError = true;
+      // this.form2PriceError = true;
+      this.form2CurrencyError = true;
     }
   }
 
@@ -301,6 +308,9 @@ export class CreateEventComponent implements OnInit {
       form2PriceItemDetails.currency = "";
       console.log(form2PriceItemDetails);
       this.form2PricingItems.push(form2PriceItemDetails);
+      this.form2TicketNameError = true;
+      // this.form2PriceError = true;
+      this.form2CurrencyError = true;
     }
     console.log(this.noOfPricing);
     console.log(this.form2PricingItems);
@@ -315,34 +325,55 @@ export class CreateEventComponent implements OnInit {
     { "currency": "Canadian dollar" }
   ];
 
+  form2CurrencyError: boolean = false;
   form2DropDown3CurrencyOnSelectionChanged(event, item){
     let form2DropDown3CurrencySelected: string = "";
     if(event.isUserInput){
       form2DropDown3CurrencySelected = event.source.value;
-      // console.log(form2DropDown3CurrencySelected);
+      console.log(form2DropDown3CurrencySelected);
+      if (form2DropDown3CurrencySelected == undefined) {
+        this.form2CurrencyError = true;
+      } else {
+        this.form2CurrencyError = false;
+        let index = this.form2PricingItems.indexOf(item);
+        item.currency = form2DropDown3CurrencySelected;
+        this.form2PricingItems[index] = item;
+        console.log(this.form2PricingItems);
+      }
+    }
+  }
+
+  form2TicketNameError: boolean = false;
+  form2TicketNameInputOnBlur(event: any, item){
+    let form2TicketNameSelected: string = "";
+    form2TicketNameSelected = event.target.value;
+    console.log(form2TicketNameSelected);
+    if (form2TicketNameSelected.trim() == "") {
+      this.form2TicketNameError = true;
+    } else {
+      this.form2TicketNameError = false;
       let index = this.form2PricingItems.indexOf(item);
-      item.currency = form2DropDown3CurrencySelected;
+      item.ticketName = form2TicketNameSelected.trim();
       this.form2PricingItems[index] = item;
       console.log(this.form2PricingItems);
     }
   }
 
-  form2TicketNameInputOnBlur(event: any, item){
-    let form2TicketNameSelected: string = "";
-    form2TicketNameSelected = event.target.value;
-    let index = this.form2PricingItems.indexOf(item);
-    item.ticketName = form2TicketNameSelected;
-    this.form2PricingItems[index] = item;
-    console.log(this.form2PricingItems);
-  }
-
+  form2PriceError: boolean = false;
   form2PriceInputOnBlur(event: any, item){
-    let form2PriceSelected: number = 0;
-    form2PriceSelected = event.target.value;
-    let index = this.form2PricingItems.indexOf(item);
-    item.price = form2PriceSelected;
-    this.form2PricingItems[index] = item;
-    console.log(this.form2PricingItems);
+    let form2PriceSelected: number = Number(event.target.value);
+    // form2PriceSelected = event.target.value;
+    if (typeof(form2PriceSelected) != 'number') {
+      this.form2PriceError = true;
+    } else if(form2PriceSelected.toString() == "NaN") {
+      this.form2PriceError = true;
+    } else {
+      this.form2PriceError = false;
+      let index = this.form2PricingItems.indexOf(item);
+      item.price = form2PriceSelected;
+      this.form2PricingItems[index] = item;
+      console.log(this.form2PricingItems);
+    }
   }
 
 
@@ -366,10 +397,14 @@ export class CreateEventComponent implements OnInit {
           this.form2ShowError = true;
           console.log(this.form2ShowError);
           console.log("Problem variable");
+      } else if(this.form2TicketNameError == true || this.form2PriceError == true || this.form2CurrencyError == true) {
+        this.form2ShowError = true;
+        console.log(this.form2ShowError);
+        console.log("Problem variable");
       } else {
         // console.log(this.form1.form1EventTitleCtrl.value);
         this.form2ShowError = false;
-        console.log(this.form2PricingItems);
+        // console.log(this.form2PricingItems);
         stepper.next();
       }
     }

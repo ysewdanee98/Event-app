@@ -216,6 +216,7 @@
             </mat-button>
           </div>
           <br>
+          <div style="text-align: right; color: red;" *ngIf="(form2TicketNameError == true || form2PriceError == true || form2CurrencyError == true) && form2ShowError == true">* something wrong</div>
           <table style="width:100%;">
             <tr>
               <th>Ticket Name</th>
@@ -239,7 +240,7 @@
                 <mat-form-field appearance="fill">
                   <mat-label>Select currency</mat-label>
                   <mat-select required>
-                    <mat-option >Select currency</mat-option>
+                    <mat-option (onSelectionChange)="form2DropDown3CurrencyOnSelectionChanged($event, items)">Select currency</mat-option>
                     <mat-option (onSelectionChange)="form2DropDown3CurrencyOnSelectionChanged($event, items)" *ngFor="let currencies of form2PriceCurrencies" [value]="currencies.currency">
                       {{currencies.currency}}
                     </mat-option>
