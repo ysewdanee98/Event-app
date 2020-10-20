@@ -215,16 +215,37 @@
               &nbsp;&nbsp;<mat-icon>add</mat-icon>&nbsp;&nbsp;
             </mat-button>
           </div>
-          <table style="width:100%; border: 1px solid black">
+          <br>
+          <table style="width:100%;">
             <tr>
               <th>Ticket Name</th>
               <th>Price</th>
               <th>Currency</th>
             </tr>
-            <tr *ngFor="let file of form2PricingItems">
-              <td>Jill</td>
-              <td>Smith</td>
-              <td>50</td>
+            <tr *ngFor="let items of form2PricingItems">
+              <td>
+                <mat-form-field appearance="fill">
+                  <mat-label>Ticket name</mat-label>
+                  <input matInput placeholder="Ticket name" [(value)]="items.ticketName" (blur)="form2TicketNameInputOnBlur($event, items)" required>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="fill">
+                  <mat-label>Price</mat-label>
+                  <input matInput placeholder="Price" [(value)]="items.price" (blur)="form2PriceInputOnBlur($event, items)" required>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="fill">
+                  <mat-label>Select currency</mat-label>
+                  <mat-select required>
+                    <mat-option >Select currency</mat-option>
+                    <mat-option (onSelectionChange)="form2DropDown3CurrencyOnSelectionChanged($event, items)" *ngFor="let currencies of form2PriceCurrencies" [value]="currencies.currency">
+                      {{currencies.currency}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
             </tr>
           </table>
         </div>

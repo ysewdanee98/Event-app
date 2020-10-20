@@ -31,7 +31,6 @@ export class CreateEventComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: ['', Validators.required]
     });
-    console.log(this.form1Categories);
     this.form1ShowError = false;
   }
 
@@ -275,14 +274,12 @@ export class CreateEventComponent implements OnInit {
     } else if (this.form2.form2ButtonTogglePriceCtrl.value=='Paid'){
       this.noOfPricing = 1;
       const form2PriceItemDetails: any = [];
-      form2PriceItemDetails.index = 0;
+      form2PriceItemDetails.index = this.form2PricingItems.length;
       form2PriceItemDetails.ticketName = "";
       form2PriceItemDetails.price = 0;
       form2PriceItemDetails.currency = "";
       this.form2PricingItems.push(form2PriceItemDetails);
     }
-    console.log(this.noOfPricing);
-    console.log(this.form2PricingItems);
   }
 
   form2PricingItems: {index: number, ticketName: string, price: number, currency: string}[] = [];
@@ -293,20 +290,58 @@ export class CreateEventComponent implements OnInit {
         this.noOfPricing = 1;
       } else {
         this.noOfPricing = this.noOfPricing -1;
+        this.form2PricingItems.pop();
       }
     } else if (getOperation == "Add") {
       this.noOfPricing = this.noOfPricing +1;
-    }
-    this.form2PricingItems = [];
-    console.log(this.noOfPricing);
-    for(let i=0;i<this.noOfPricing;i++){
       const form2PriceItemDetails: any = [];
-      form2PriceItemDetails.index = i;
+      form2PriceItemDetails.index = this.form2PricingItems.length;
       form2PriceItemDetails.ticketName = "";
       form2PriceItemDetails.price = 0;
       form2PriceItemDetails.currency = "";
+      console.log(form2PriceItemDetails);
       this.form2PricingItems.push(form2PriceItemDetails);
     }
+    console.log(this.noOfPricing);
+    console.log(this.form2PricingItems);
+  }
+
+  form2PriceCurrencies: { currency: string}[] = [
+    { "currency": "Mauritian rupee" },
+    { "currency": "Indian rupee" },
+    { "currency": "Euro" },
+    { "currency": "United States dollar" },
+    { "currency": "Singapore dollar" },
+    { "currency": "Canadian dollar" }
+  ];
+
+  form2DropDown3CurrencyOnSelectionChanged(event, item){
+    let form2DropDown3CurrencySelected: string = "";
+    if(event.isUserInput){
+      form2DropDown3CurrencySelected = event.source.value;
+      // console.log(form2DropDown3CurrencySelected);
+      let index = this.form2PricingItems.indexOf(item);
+      item.currency = form2DropDown3CurrencySelected;
+      this.form2PricingItems[index] = item;
+      console.log(this.form2PricingItems);
+    }
+  }
+
+  form2TicketNameInputOnBlur(event: any, item){
+    let form2TicketNameSelected: string = "";
+    form2TicketNameSelected = event.target.value;
+    let index = this.form2PricingItems.indexOf(item);
+    item.ticketName = form2TicketNameSelected;
+    this.form2PricingItems[index] = item;
+    console.log(this.form2PricingItems);
+  }
+
+  form2PriceInputOnBlur(event: any, item){
+    let form2PriceSelected: number = 0;
+    form2PriceSelected = event.target.value;
+    let index = this.form2PricingItems.indexOf(item);
+    item.price = form2PriceSelected;
+    this.form2PricingItems[index] = item;
     console.log(this.form2PricingItems);
   }
 
@@ -334,6 +369,7 @@ export class CreateEventComponent implements OnInit {
       } else {
         // console.log(this.form1.form1EventTitleCtrl.value);
         this.form2ShowError = false;
+        console.log(this.form2PricingItems);
         stepper.next();
       }
     }
