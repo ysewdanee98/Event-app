@@ -270,22 +270,37 @@
     </form>
   </mat-step>
 
-  
+
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Additional Information</ng-template>
       <!-- MatCard 9 -->
       <mat-card class="matCard9 card-container-component">
         <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">9</span> Any restrictions in regards of your audience?</mat-card-title>
+        <div style="text-align: right; color: red;" *ngIf="form3MatRadioButtonSelected.errors?.required && form3ShowError == true">* required</div>
+        <mat-radio-group formControlName="form3RadioButtonCtrl" required [class.is-invalid]="form3MatRadioButtonSelected.invalid" class="form-control">
+          <div class = "cardContainerRadioButton">
+            <div class="cardRB" *ngFor='let restriction of form3Restrictions'>
+              <mat-radio-button [value]="restriction">
+                <div style="margin-top: 5px;">
+                  &nbsp;{{restriction}}
+                </div>
 
-
+              </mat-radio-button>
+            </div>
+          </div>
+        </mat-radio-group>
       </mat-card>
+
+
+
+
 
 
 
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button style="border-radius: 50px; background-color:Blue; color: white; font-size: 18px; padding-left: 30px; padding-right: 30px;" (click)="form3GoForward(stepper)">Next</button>
       </div>
     </form>
   </mat-step>

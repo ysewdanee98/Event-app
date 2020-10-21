@@ -29,7 +29,7 @@ export class CreateEventComponent implements OnInit {
       form2ButtonTogglePriceCtrl: new FormControl('',[Validators.required])
     });
     this.thirdFormGroup = this._formBuilder.group({
-      thirdCtrl: ['', Validators.required]
+      form3RadioButtonCtrl: new FormControl('',[Validators.required])
     });
     this.form1ShowError = false;
   }
@@ -399,6 +399,33 @@ export class CreateEventComponent implements OnInit {
         // console.log(this.form1.form1EventTitleCtrl.value);
         this.form2ShowError = false;
         // console.log(this.form2PricingItems);
+        stepper.next();
+      }
+    }
+  }
+
+  get form3() { return this.thirdFormGroup.controls; }
+
+  form3Restrictions: string[] = ['None', 'Children Only', 'Women Only', 'No children', "Event 18 +", "Senior Citizen"];
+
+  get form3MatRadioButtonSelected(){
+    return this.thirdFormGroup.get('form3RadioButtonCtrl');
+  }
+
+  form3ShowError: boolean;
+  form3GoForward(stepper: MatStepper){
+    if (this.thirdFormGroup.invalid) {
+      console.log("Invalid");
+      this.form3ShowError = true;
+      console.log(this.form3ShowError);
+    } else {
+      if (false) {
+          this.form3ShowError = true;
+          console.log(this.form3ShowError);
+          console.log("Problem variable");
+      } else {
+        console.log(this.form3.form3RadioButtonCtrl.value);
+        this.form3ShowError = false;
         stepper.next();
       }
     }
