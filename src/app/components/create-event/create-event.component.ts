@@ -29,7 +29,9 @@ export class CreateEventComponent implements OnInit {
       form2ButtonTogglePriceCtrl: new FormControl('',[Validators.required])
     });
     this.thirdFormGroup = this._formBuilder.group({
-      form3RadioButtonCtrl: new FormControl('',[Validators.required])
+      form3RadioButtonCtrl: new FormControl('',[Validators.required]),
+      form3AdditionalInfoCtrl: [],
+      form3ButtonToggleAuthorityCtrl: new FormControl('',[Validators.required])
     });
     this.form1ShowError = false;
   }
@@ -191,7 +193,7 @@ export class CreateEventComponent implements OnInit {
   }
 
   //format bytes
-  form1FormatBytes(bytes, decimals) {
+  formatBytes(bytes, decimals) {
     if (bytes === 0) {
       return '0 Bytes';
     }
@@ -467,6 +469,7 @@ export class CreateEventComponent implements OnInit {
       this.form3SpecialGuests.push(form3GuestDetails);
       this.form3GuestNameError = true;
     }
+    this.form3FileSize = this.form3NoOfSpecialGuests;
     console.log(this.form3SpecialGuests);
   }
 
@@ -486,6 +489,66 @@ export class CreateEventComponent implements OnInit {
     }
   }
 
+  form3Files: any[] = [];
+
+  //on file drop handler
+  form3OnFileDropped($event) {
+    this.form3PrepareFilesList($event);
+  }
+
+  //handle file from browsing
+  form3FileBrowseHandler(files) {
+    this.form3PrepareFilesList(files);
+  }
+
+  //Delete file from files list
+  form3DeleteFile(index: number) {
+    this.form3Files.splice(index, 1);
+  }
+
+  form3FileSize: number = this.form3NoOfSpecialGuests;
+
+  //Convert Files list to normal array list
+  form3PrepareFilesList(files: Array<any>) {
+    for (const item of files) {
+      if (this.form3Files.length < this.form3FileSize) {
+        var reader = new FileReader();
+      // console.log(item);
+      reader.readAsDataURL(item); // read file as data url
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        item.picture = event.target.result as string;
+        // console.log(item.picture);
+      }
+      this.form3Files.push(item);
+      }
+    }
+     console.log(this.form3Files);
+  }
+
+  get form3MatButtonToggleAuthoritySelected(){
+    return this.thirdFormGroup.get('form3ButtonToggleAuthorityCtrl');
+  }
+
+  form3AuthorityError: boolean = true;
+  form3OperationMatButtonToggleAuthority(){
+    if (this.form3.form3ButtonToggleAuthorityCtrl.value=='No') {
+      this.form3AuthoritySelected = "";
+      this.form3AuthorityError = false;
+    } else if (this.form3.form3ButtonToggleAuthorityCtrl.value=='Yes'){
+      this.form3AuthorityError = true;
+    }
+    console.log(this.form3AuthorityError);
+  }
+
+  form3Authorties: string[] = ['Police', 'Fire Department', 'Traffic Control'];
+
+  form3AuthoritySelected: string = "";
+  form3ChangeAuthority(event){
+    console.log(event.source.value);
+    this.form3AuthoritySelected = event.source.value;
+    this.form3AuthorityError = false;
+  }
+
   form3ShowError: boolean;
   form3GoForward(stepper: MatStepper){
     if (this.thirdFormGroup.invalid) {
@@ -493,12 +556,14 @@ export class CreateEventComponent implements OnInit {
       this.form3ShowError = true;
       console.log(this.form3ShowError);
     } else {
-      if (this.form3NoofPeopleExpectedError == true || this.form3NoOfPeopleExpected < 0 || this.form3GuestNameError == true) {
-          this.form3ShowError = true;
-          console.log(this.form3ShowError);
-          console.log("Problem variable");
+      if (this.form3NoofPeopleExpectedError == true || this.form3NoOfPeopleExpected < 0 ||
+          this.form3GuestNameError == true || this.form3AuthorityError == true) {
+            this.form3ShowError = true;
+            console.log(this.form3ShowError);
+            console.log("Problem variable");
       } else {
-        console.log(this.form3.form3RadioButtonCtrl.value);
+        // console.log(this.form3.form3RadioButtonCtrl.value);
+        // console.log(this.form3.form3AdditionalInfoCtrl.value);
         this.form3ShowError = false;
         stepper.next();
       }

@@ -135,7 +135,7 @@
             <img [src]="file?.picture" height="50" width="50">
             <div class="info">
               <h4 class="name">{{ file?.name }}</h4>
-              <p class="size">{{ form1FormatBytes(file?.size) }}</p>
+              <p class="size">{{ formatBytes(file?.size) }}</p>
             </div>
             <div class="delete" (click)="form1DeleteFile(i)">
               <mat-icon style="font-size: 25px;">delete_forever</mat-icon>
@@ -333,13 +333,63 @@
               <input matInput placeholder="Guest name" [(value)]="guests.name" (blur)="form3GuestNameInputOnBlur($event, guests)" required>
             </mat-form-field>
           </div>
+          <br>
+          <div style="text-align: right;">Maximun: {{form3FileSize}} images</div>
+          <div style="text-align: right;">Selected: {{form3Files.length}} images</div>
+          <mat-card-content style="font-size: 20px;">Upload an Image</mat-card-content>
+          <div class="container" appDnd (fileDropped)="form3OnFileDropped($event)">
+            <input type="file" #fileDropRef2 id="fileDropRef2" multiple (change)="form3FileBrowseHandler($event.target.files)" />
+            <mat-icon style="font-size: 50px; color: SkyBlue;">cloud_upload</mat-icon>
+            <h3>Drag & drop to upload</h3>
+            <br>
+            <label for="fileDropRef2">Select file</label>
+          </div>
+          <div class="files-list">
+            <div class="single-file" *ngFor="let file of form3Files; let i = index">
+              <img [src]="file?.picture" height="50" width="50">
+              <div class="info">
+                <h4 class="name">{{ file?.name }}</h4>
+                <p class="size">{{ formatBytes(file?.size) }}</p>
+              </div>
+              <div class="delete" (click)="form3DeleteFile(i)">
+                <mat-icon style="font-size: 25px;">delete_forever</mat-icon>
+              </div>
+            </div>
+          </div>
         </div>
-
+        <br>
+        <mat-card-content style="font-size: 20px;">Any additional infomartion?</mat-card-content>
+        <mat-form-field style="width: 50%;" appearance="fill">
+          <mat-label>Additonal Information</mat-label>
+          <textarea matInput formControlName="form3AdditionalInfoCtrl" placeholder="Event about..."></textarea>
+        </mat-form-field>
       </mat-card>
 
+      <!-- MatCard 12 -->
+      <mat-card class="matCard12 card-container-component">
+        <mat-card-title><span class="dotNumber">12</span> Any authorities need to be notified?</mat-card-title>
 
+        <div style="text-align: right; color: red;" *ngIf="form3MatButtonToggleAuthoritySelected.errors?.required && form3ShowError == true">* required</div>
+        <mat-button-toggle-group style="padding: 5px; border-radius: 50px; background-color:Azure;" formControlName="form3ButtonToggleAuthorityCtrl" required [class.is-invalid]="form3MatButtonToggleAuthoritySelected.invalid" class="form-control">
+          <mat-button-toggle style="border-top-left-radius: 75px 100px; border-bottom-left-radius: 75px 100px;" value="Yes" (click)="form3OperationMatButtonToggleAuthority()" class="matButtonToggle" [class.selected]="form3.form3ButtonToggleAuthorityCtrl.value=='Yes'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Yes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-button-toggle>
+          <mat-button-toggle style="border-top-right-radius: 75px 100px; border-bottom-right-radius: 75px 100px;" value="No" (click)="form3OperationMatButtonToggleAuthority()" class="matButtonToggle" [class.selected]="form3.form3ButtonToggleAuthorityCtrl.value=='No'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-button-toggle>
+        </mat-button-toggle-group>
 
-
+        <div *ngIf="form3.form3ButtonToggleAuthorityCtrl.value=='Yes'"><br>
+          <div style="text-align: right; color: red;" *ngIf="form3AuthorityError == true && form3ShowError == true">* required</div>
+          <mat-radio-group required>
+            <div class = "cardContainerRadioButton">
+              <div class="cardRB" *ngFor='let authority of form3Authorties'>
+                <mat-radio-button [value]="authority" (change)="form3ChangeAuthority($event)">
+                  <div style="margin-top: 5px;">
+                    &nbsp;{{authority}}
+                  </div>
+                </mat-radio-button>
+              </div>
+            </div>
+          </mat-radio-group>
+        </div>
+      </mat-card>
 
       <div style="text-align: right;">
         <div style="color: red; padding-bottom: 10px; margin-right: 5%;" *ngIf="form3ShowError == true">
@@ -357,6 +407,7 @@
       </div>
     </form>
   </mat-step>
+  
 
   <mat-step>
     <ng-template matStepLabel>Summary</ng-template>
