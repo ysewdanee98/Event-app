@@ -266,16 +266,16 @@ export class CreateEventComponent implements OnInit {
     return this.secondFormGroup.get('form2ButtonTogglePriceCtrl');
   }
 
-  noOfPricing: number = 0;
+  form2NoOfPricing: number = 0;
   form2OperationMatButtonTogglePrice(){
     if (this.form2.form2ButtonTogglePriceCtrl.value=='Free') {
-      this.noOfPricing = 0;
+      this.form2NoOfPricing = 0;
       this.form2PricingItems = [];
       this.form2TicketNameError = false;
       this.form2PriceError = false;
       this.form2CurrencyError = false;
     } else if (this.form2.form2ButtonTogglePriceCtrl.value=='Paid'){
-      this.noOfPricing = 1;
+      this.form2NoOfPricing = 1;
       this.form2PricingItems = [];
       const form2PriceItemDetails: any = [];
       form2PriceItemDetails.index = this.form2PricingItems.length;
@@ -293,14 +293,14 @@ export class CreateEventComponent implements OnInit {
 
   form2OperationNoofPricing(getOperation: string){
     if (getOperation == "Minus") {
-      if (this.noOfPricing == 1) {
-        this.noOfPricing = 1;
+      if (this.form2NoOfPricing == 1) {
+        this.form2NoOfPricing = 1;
       } else {
-        this.noOfPricing = this.noOfPricing -1;
+        this.form2NoOfPricing = this.form2NoOfPricing -1;
         this.form2PricingItems.pop();
       }
     } else if (getOperation == "Add") {
-      this.noOfPricing = this.noOfPricing +1;
+      this.form2NoOfPricing = this.form2NoOfPricing +1;
       const form2PriceItemDetails: any = [];
       form2PriceItemDetails.index = this.form2PricingItems.length;
       form2PriceItemDetails.ticketName = "";
@@ -312,7 +312,7 @@ export class CreateEventComponent implements OnInit {
       // this.form2PriceError = true;
       this.form2CurrencyError = true;
     }
-    console.log(this.noOfPricing);
+    console.log(this.form2NoOfPricing);
     console.log(this.form2PricingItems);
   }
 
@@ -412,6 +412,80 @@ export class CreateEventComponent implements OnInit {
     return this.thirdFormGroup.get('form3RadioButtonCtrl');
   }
 
+  form3NoOfPeopleExpected: number = 100;
+  form3OperationNoofPeopleExpected(getOperation: string){
+    if (getOperation == "Minus") {
+      if (this.form3NoOfPeopleExpected == 0) {
+        this.form3NoOfPeopleExpected = 0;
+      } else if (this.form3NoOfPeopleExpected < 0) {
+        this.form3NoofPeopleExpectedError = true;
+      } else {
+        this.form3NoOfPeopleExpected = this.form3NoOfPeopleExpected -1;
+      }
+    } else if (getOperation == "Add") {
+      this.form3NoOfPeopleExpected = this.form3NoOfPeopleExpected +1;
+    }
+    this.form3NoofPeopleExpectedError = false;
+    console.log(this.form3NoOfPeopleExpected);
+  }
+
+  form3NoofPeopleExpectedError: boolean = false;
+  form3NoofPeopleExpectedInputOnBlur(event){
+    console.log(event.target.value);
+    let form3PeopleSelected: number = Number(event.target.value);
+    if (typeof(form3PeopleSelected) != 'number') {
+      this.form3NoofPeopleExpectedError = true;
+    } else if(form3PeopleSelected.toString() == "NaN") {
+      this.form3NoofPeopleExpectedError = true;
+    } else if(form3PeopleSelected < 0) {
+      this.form3NoofPeopleExpectedError = true;
+    }else {
+      this.form3NoOfPeopleExpected = form3PeopleSelected;
+      this.form3NoofPeopleExpectedError = false;
+    }
+  }
+
+  form3NoOfSpecialGuests: number = 1;
+  form3SpecialGuests: {index: number, name: string}[] = [{index:0, name: ""}];
+  form3OperationNoOfSpecialGuests(getOperation: string){
+    if (getOperation == "Minus") {
+      if (this.form3NoOfSpecialGuests == 1 || this.form3NoOfSpecialGuests == 0) {
+        this.form3NoOfSpecialGuests = 0;
+        this.form3GuestNameError = false;
+        this.form3SpecialGuests.pop();
+        console.log("No of guests: 0");
+      } else {
+        this.form3NoOfSpecialGuests = this.form3NoOfSpecialGuests -1;
+        this.form3SpecialGuests.pop();
+      }
+    } else if (getOperation == "Add") {
+      this.form3NoOfSpecialGuests = this.form3NoOfSpecialGuests +1;
+      const form3GuestDetails: any = [];
+      form3GuestDetails.index = this.form3SpecialGuests.length;
+      form3GuestDetails.name = "";
+      console.log(form3GuestDetails);
+      this.form3SpecialGuests.push(form3GuestDetails);
+      this.form3GuestNameError = true;
+    }
+    console.log(this.form3SpecialGuests);
+  }
+
+  form3GuestNameError: boolean = true;
+  form3GuestNameInputOnBlur(event, guest){
+    let form3NameSelected: string = "";
+    form3NameSelected = event.target.value;
+    console.log(form3NameSelected);
+    if (form3NameSelected.trim() == "") {
+      this.form3GuestNameError = true;
+    } else {
+      this.form3GuestNameError = false;
+      let index = this.form3SpecialGuests.indexOf(guest);
+      guest.name = form3NameSelected.trim();
+      this.form3SpecialGuests[index] = guest;
+      console.log(this.form3SpecialGuests);
+    }
+  }
+
   form3ShowError: boolean;
   form3GoForward(stepper: MatStepper){
     if (this.thirdFormGroup.invalid) {
@@ -419,7 +493,7 @@ export class CreateEventComponent implements OnInit {
       this.form3ShowError = true;
       console.log(this.form3ShowError);
     } else {
-      if (false) {
+      if (this.form3NoofPeopleExpectedError == true || this.form3NoOfPeopleExpected < 0 || this.form3GuestNameError == true) {
           this.form3ShowError = true;
           console.log(this.form3ShowError);
           console.log("Problem variable");

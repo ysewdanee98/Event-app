@@ -6,9 +6,9 @@
   border: 1px solid #339FFF;
 }
 
-::ng-deep .mat-horizontal-stepper-header{
-  // pointer-events: none !important; //Set it after testing
-}
+// ::ng-deep .mat-horizontal-stepper-header{
+//   // pointer-events: none !important; //Set it after testing
+// }
 
 .dotNumber {
   padding: 3px;
@@ -216,18 +216,18 @@
 .matCard7 {
   text-align: center;
 
-  mat-form-field {
-    // background: blue;
-  }
+  // mat-form-field {
+  //   // background: blue;
+  // }
 
 }
 
 .matCard8 {
   text-align: center;
 
-  mat-form-field {
-    // background: blue;
-  }
+  // mat-form-field {
+  //   // background: blue;
+  // }
 
   .matButtonToggle {
     background-color:Azure;
@@ -315,4 +315,38 @@
     background-color: yellow;
   }
 
+}
+
+.matCard10 {
+  text-align: center;
+
+  .containerPeopleExpected {
+    background-color: blue;
+    margin: auto;
+    width: 175px;
+    padding: 2px;
+    border-radius: 50px;
+  }
+
+}
+
+.matCard11 {
+  text-align: center;
+
+  .containerSpecialGuest {
+    background-color: blue;
+    margin: auto;
+    width: 175px;
+    padding: 2px;
+    border-radius: 50px;
+  }
+
+}
+
+.form3BackNext {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  // background: rgb(141, 141, 0);
 }
