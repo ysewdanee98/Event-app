@@ -1,4 +1,4 @@
-<mat-horizontal-stepper [linear]="false" #stepper> <!-- Linear false for tested, Should be true after -->
+<mat-horizontal-stepper [linear]="true" #stepper> <!-- Linear false for tested, Should be true after -->
 
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
@@ -285,7 +285,6 @@
                 <div style="margin-top: 5px;">
                   &nbsp;{{restriction}}
                 </div>
-
               </mat-radio-button>
             </div>
           </div>
@@ -407,14 +406,123 @@
       </div>
     </form>
   </mat-step>
-  
+
 
   <mat-step>
     <ng-template matStepLabel>Summary</ng-template>
-    <p>You are now done.</p><br>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    <!-- MatCard 13 -->
+    <mat-card class="matCard13 card-container-component">
+      <mat-card-title style="  text-align: center;">Summary</mat-card-title>
+
+      <mat-card-content>Category of event: {{form1CatetogorySelected}}, Sub-category of event: {{form1SubCategorySelected}}</mat-card-content>
+
+      <mat-card-content>{{form1.form1ButtonToggleCtrl.value}} event</mat-card-content>
+
+      <mat-card-content>Event will be: {{form1DropDown1Selected}}, {{form1DropDown2Selected}}</mat-card-content>
+
+      <mat-card-content>Starts: {{form1StartDate | date :'fullDate'}}, Ends by: {{form1EndDate | date :'fullDate'}}</mat-card-content>
+
+      <mat-card-content>Time: {{form1StartTime}} - {{form1EndTime}}</mat-card-content>
+
+      <mat-card-content>Event title: {{form1.form1EventTitleCtrl.value}}</mat-card-content>
+
+      <mat-card-content>Event about: {{form1.form1EventAboutCtrl.value}}</mat-card-content>
+
+      <mat-card-content>Event's pictures:<br>
+        <img *ngFor="let file of form1Files" [src]="file?.picture" style="max-height: 125px; max-width: 150px;">
+      </mat-card-content>
+
+      <mat-card-content *ngIf="form2DropDown1CitySelected != null">Location: {{form2DropDown1CitySelected}}, Venue: {{form2DropDown2VenueSelected}}</mat-card-content>
+
+      <mat-card-content *ngIf="form2DropDown1CitySelected == null">Address: {{form2.form2AddressCtrl.value}}</mat-card-content>
+
+      <mat-card-content>Price: {{form2.form2ButtonTogglePriceCtrl.value}}</mat-card-content>
+
+      <mat-card-content *ngIf="form2.form2ButtonTogglePriceCtrl.value == 'Paid'">
+        Different pricing: {{form2NoOfPricing}}
+        <br>
+        <table>
+          <tr style="text-align: center;">
+            <th>Ticket Name</th>
+            <th>Price</th>
+            <th>Currency</th>
+          </tr>
+          <tr style="text-align: center" *ngFor="let items of form2PricingItems">
+            <td>
+              {{items.ticketName}}
+            </td>
+            <td>
+              {{items.price}}
+            </td>
+            <td>
+              {{items.currency}}
+            </td>
+          </tr>
+        </table>
+      </mat-card-content>
+
+      <mat-card-content>Restrictions: {{form3.form3RadioButtonCtrl.value}}</mat-card-content>
+
+      <mat-card-content>People expected: {{form3NoOfPeopleExpected}}</mat-card-content>
+
+      <mat-card-content>No of guests: {{form3NoOfSpecialGuests}}</mat-card-content>
+
+      <mat-card-content *ngIf="form3NoOfSpecialGuests > 0">
+        <table>
+          <tr style="text-align: center;">
+            <th>Guest No.</th>
+            <th>Guest Name</th>
+          </tr>
+          <tr style="text-align: center" *ngFor="let guest of form3SpecialGuests; let i = index">
+            <td>
+              {{i+1}}
+            </td>
+            <td>
+              {{guest.name}}
+            </td>
+          </tr>
+        </table>
+      </mat-card-content>
+
+      <mat-card-content *ngIf="form3NoOfSpecialGuests > 0">
+        Guests' images:
+        <div *ngIf="form3Files.length > 0">
+          <img *ngFor="let file of form3Files" [src]="file?.picture" style="max-height: 125px; max-width: 150px;">
+        </div>
+        <div *ngIf="form3Files.length == 0">
+          None
+        </div>
+      </mat-card-content>
+
+      <mat-card-content>Additional information: {{form3.form3AdditionalInfoCtrl.value}}</mat-card-content>
+
+      <mat-card-content *ngIf="form3.form3ButtonToggleAuthorityCtrl.value == 'Yes'">
+        Authority: {{form3AuthoritySelected}}
+      </mat-card-content>
+    </mat-card>
+
+    <form [formGroup]="summaryFormGroup">
+      <div style="text-align: right; color: red;" *ngIf="summaryTermConditionRadioButtonSelected.errors?.required && summaryShowError == true">* required</div>
+      <div class="matTermCondition">
+        <mat-radio-group formControlName="summaryTermConditionRadioButtonCtrl" required [class.is-invalid]="summaryTermConditionRadioButtonSelected.invalid" class="form-control">
+          <mat-radio-button [value]="'Agree'" style="margin: 0 auto; margin-left: 10%;">
+            <div style="margin-top: 5px;">
+              I hereby accept the Terms and Conditions for the event creation provided by AaoMilo
+            </div>
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </form>
+
+    <br><br>
+
+    <div class="summaryBackNext">
+      <div style="padding: 5px; border-radius: 50px; text-align: center; width: 100px; margin: 0 auto; margin-left: 5%;">
+        <button mat-button style="border-radius: 50px; color: blue; font-size: 18px; padding-left: 30px; padding-right: 30px;" matStepperPrevious>Back</button>
+      </div>
+      <div style="padding: 5px; border-radius: 50px; background-color:SkyBlue; text-align: center; width: 175px; margin: 0 auto; margin-right: 5%;">
+        <button mat-button style="border-radius: 50px; background-color:Blue; color: white; font-size: 18px; padding-left: 30px; padding-right: 30px;" (click)="summaryGoForward(stepper)">Create event</button>
+      </div>
     </div>
   </mat-step>
 

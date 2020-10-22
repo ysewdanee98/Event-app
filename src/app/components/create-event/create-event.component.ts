@@ -13,6 +13,7 @@ export class CreateEventComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  summaryFormGroup: FormGroup;
 
   constructor(private _formBuilder: FormBuilder, public datepipe: DatePipe) { }
 
@@ -32,6 +33,9 @@ export class CreateEventComponent implements OnInit {
       form3RadioButtonCtrl: new FormControl('',[Validators.required]),
       form3AdditionalInfoCtrl: [],
       form3ButtonToggleAuthorityCtrl: new FormControl('',[Validators.required])
+    });
+    this.summaryFormGroup = this._formBuilder.group({
+      summaryTermConditionRadioButtonCtrl: new FormControl('',[Validators.required])
     });
     this.form1ShowError = false;
   }
@@ -567,6 +571,23 @@ export class CreateEventComponent implements OnInit {
         this.form3ShowError = false;
         stepper.next();
       }
+    }
+  }
+
+  get summaryTermConditionRadioButtonSelected(){
+    return this.summaryFormGroup.get('summaryTermConditionRadioButtonCtrl');
+  }
+
+  summaryShowError: boolean;
+  summaryGoForward(stepper: MatStepper){
+    if (this.summaryFormGroup.invalid) {
+      console.log("Invalid");
+      this.summaryShowError = true;
+      console.log(this.summaryShowError);
+    } else {
+      this.summaryShowError = false;
+      console.log("Done");
+      stepper.next();
     }
   }
 
