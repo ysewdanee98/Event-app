@@ -237,7 +237,14 @@ export class CreateEventComponent implements OnInit {
   get form2() { return this.secondFormGroup.controls; }
 
   form2Cities: { city: string, venues: string[] }[] = [
-    { "city": "Music", "venues": ['Alternative Music', 'Blues', 'Classical Music', 'Country Music', 'Dance Music', 'Electronic Music', 'Hip Hop / RAP', 'Latin Music', 'Jazz', 'Opera', 'POP'] }
+    { "city": "Port Louis District", "venues": ['Mauritius Tourism Promotion Authority', 'Le Suffren Hotel & Marina', 'Labourdonnais Waterfront Hotel', 'Le Saint George Hotel', 'Royal Park'] },
+    { "city": "Pamplemousses District", "venues": ['Mont Choisy Hotel', 'Angsana Balaclava Mauritius', 'Hotel Ravenala Attitude', 'Maritim Hotel Mauritius', 'Indian Resort & Spa'] },
+    { "city": "Rivière du Rempart District", "venues": ['Villa Kreola', 'Lux Grand Gaube', 'Blumarine Attitude Hotel', 'Centara Grand Azuri Residence & Suites Mauritius', 'Zilwa Attitude'] },
+    { "city": "Moka District", "venues": ['Trianon Convention Centre', 'Voila Bagatelle', 'Gold Crest Hotel', 'Hennessy Park Hotel', 'Mauritius Tourism Promotion Authority'] },
+    { "city": "Plaines Wilhems District", "venues": ['El Monaco Hotel', 'Gold Crest Hotel', 'Trianon Convention Centre', 'Hennessy Park Hotel', 'Voila Bagatelle'] },
+    { "city": "Black River District", "venues": ['Tamarin Hotel', 'Sands Resort & Spa', 'Lakaz Chamarel', 'Tamarina By Mauritius Boutique Hotel', 'Maradiva Villas Resort And Spa'] },
+    { "city": "Savanne District", "venues": ['Shanti Maurice Resort', 'Sofitel So Mauritius', 'Outrigger Mauritius Resort and Spa - A KSL Resort', 'Heritage Awali Golf & Spa Resort', 'Villas Valriche'] },
+    { "city": "Grand Port District", "venues": ['Holiday Inn Mauritius Mon Tresor', 'Preskil Beach Resort', 'Shandrani Beachcomber Resort & Spa', 'Anantara Iko Mauritius Resort & Villas', 'Blue Lagoon Beach Hotel'] }
   ];
 
   form2DropDown1CitySelected: string = null;
