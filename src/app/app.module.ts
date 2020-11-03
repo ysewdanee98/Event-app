@@ -13,13 +13,21 @@ import { HomeComponent } from './components/home/home.component';
 import { CreateEventComponent } from './components/create-event/create-event.component';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { DatePipe } from '@angular/common';
+import { Form1Component } from './components/create-event/form1/form1.component';
+import { Form2Component } from './components/create-event/form2/form2.component';
+import { Form3Component } from './components/create-event/form3/form3.component';
+import { Form4Component } from './components/create-event/form4/form4.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    Form1Component,
+    Form2Component,
+    Form3Component,
+    Form4Component
   ],
   imports: [
     BrowserModule,

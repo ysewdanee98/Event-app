@@ -1,0 +1,151 @@
+<form [formGroup]="firstFormGroup">
+  <!-- MatCard 1 -->
+  <mat-card class="matCard1 card-container-component">
+    <mat-card-title ><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">1</span> What is the Category of your Event?</mat-card-title>
+    <div style="text-align: right; color: red;" *ngIf="form1CatetogorySelected == null && form1ShowError == true">* required</div>
+    <div class = "cardContainerCategory">
+      <div class="card" *ngFor='let category of form1Categories'>
+        <mat-button mat-icon-button class="matIconButtonCategory" [class.selected]="form1CatetogorySelected==category.category" (click)="form1CategoryChosen(category.category)">
+          <mat-icon>{{category.icon}}</mat-icon>
+        </mat-button>
+        {{category.category}}
+      </div>
+    </div>
+    <br>
+    <div *ngIf= "form1SubCategories !=null">
+      <mat-card-content style="font-size: 20px;">Select Subcategory</mat-card-content>
+      <div style="text-align: right; color: red;" *ngIf="form1SubCategorySelected == null && form1ShowError == true">* required</div>
+        <div class = "cardContainerSubCategory" *ngFor='let sub of form1SubCategories'>
+          <mat-chip-list>
+            <div class="card" *ngFor="let subCate of sub.subCategory">
+              <mat-chip class="chipSubCategory" [class.selected]="form1SubCategorySelected==subCate" (click)="form1SubCategoryChosen(subCate)">{{ subCate }}</mat-chip>
+            </div>
+          </mat-chip-list>
+        </div>
+    </div>
+  </mat-card>
+
+  <!-- MatCard 2 -->
+  <mat-card class="matCard2 card-container-component">
+    <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">2</span> Is this a Private or Public Event?</mat-card-title>
+    <div style="text-align: right; color: red;" *ngIf="form1MatButtonToggleSelected.errors?.required && form1ShowError == true">* required</div>
+    <mat-button-toggle-group style="padding: 5px; border-radius: 50px; background-color:Azure;" formControlName="form1ButtonToggleCtrl" required [class.is-invalid]="form1MatButtonToggleSelected.invalid" class="form-control">
+      <mat-button-toggle style="border-top-left-radius: 75px 100px; border-bottom-left-radius: 75px 100px;" value="Private" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Private'">&nbsp;&nbsp; Private &nbsp;&nbsp;</mat-button-toggle>
+      <mat-button-toggle style="border-top-right-radius: 75px 100px; border-bottom-right-radius: 75px 100px;" value="Public" class="matButtonToggle" [class.selected]="form1.form1ButtonToggleCtrl.value=='Public'">&nbsp;&nbsp; Public &nbsp;&nbsp;</mat-button-toggle>
+    </mat-button-toggle-group>
+  </mat-card>
+
+  <!-- MatCard 3 -->
+  <mat-card class="matCard3 card-container-component">
+    <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">3</span> When will this Event be?</mat-card-title>
+
+    <div style="text-align: right; color: red;" *ngIf="form1DropDown2Selected==null && form1ShowError == true">* required</div> <!-- For Drop Down 2 -->
+    <div>
+      <mat-form-field style="width: 20%;" appearance="fill">
+        <mat-label>Select</mat-label>
+        <mat-select formControlName="form1DropDown1Ctrl" required>
+          <mat-option (onSelectionChange)="form1DropDown1OnSelectionChanged($event)" *ngFor="let option1 of form1DropDown1" [value]="option1.value">
+            {{option1.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field style="width: 20%;" appearance="fill" *ngFor='let sub of form1DropDown2'>
+        <mat-label>Select</mat-label>
+        <mat-select formControlName="form1DropDown2Ctrl" required>
+          <mat-option (onSelectionChange)="form1DropDown2OnSelectionChanged($event)" *ngFor="let option2 of sub.dropDown2" [value]="option2">
+            {{option2}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div style="text-align: right; color: red;" *ngIf="(form1StartDate==null || form1EndDate==null) && form1ShowError == true">* required</div>
+    <div style="text-align: right; color: red;" *ngIf="(form1StartDate=='Invalid date'|| form1EndDate=='Invalid date' || form1StartDate > form1EndDate)">* invalid date</div>
+      <mat-form-field appearance="fill">
+        <mat-label>Starts</mat-label>
+        <input matInput [matDatepicker]="picker1" (dateChange)="form1StartDateEvent($event)" placeholder="MM/DD/YYYY">
+        <mat-datepicker-toggle style="color: skyblue;" matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <mat-form-field appearance="fill">
+        <mat-label>Ends By</mat-label>
+        <input matInput [matDatepicker]="picker2" (dateChange)="form1EndDateEvent($event)" placeholder="MM/DD/YYYY">
+        <mat-datepicker-toggle style="color: skyblue;" matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    <!-- <div>{{noOfDatesBetween}}</div> -->
+
+    <div style="text-align: right; color: red;" *ngIf="(form1StartTime==null || form1EndTime==null || form1StartTime=='' || form1EndTime=='') && form1ShowError == true">* required</div>
+    <div style="margin-left: 37%; margin-right: 63%;">Time</div>
+    <mat-form-field>
+      <input matInput #startTime type="time" (blur)="form1StartTimeEvent(startTime.value)">
+    </mat-form-field>
+    -
+    <mat-form-field>
+      <input matInput #endTime type="time" (blur)="form1EndTimeEvent(endTime.value)">
+    </mat-form-field>
+  </mat-card>
+
+  <!-- MatCard 4 -->
+  <mat-card class="matCard4N5 card-container-component">
+    <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">4</span> Event Title?</mat-card-title>
+    <mat-form-field appearance="fill">
+      <mat-label>Event Title</mat-label>
+      <input matInput formControlName="form1EventTitleCtrl" required placeholder="Event title">
+    </mat-form-field>
+  </mat-card>
+
+  <!-- MatCard 5 -->
+  <mat-card class="matCard4N5 card-container-component">
+    <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">5</span> What is this Event about?</mat-card-title>
+    <mat-form-field appearance="fill">
+      <mat-label>Event About</mat-label>
+      <textarea matInput formControlName="form1EventAboutCtrl" required placeholder="Event about..."></textarea>
+    </mat-form-field>
+  </mat-card>
+
+  <!-- MatCard 6 -->
+  <mat-card class="matCard6 card-container-component">
+    <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">6</span> Event's picture</mat-card-title>
+    <div style="text-align: right;">Maximun: {{form1FileSize}} images</div>
+    <div style="text-align: right;">Selected: {{form1Files.length}} images</div>
+    <mat-card-content style="font-size: 20px;">Upload main Image</mat-card-content>
+    <div style="text-align: right; color: red;" *ngIf="form1Files.length == 0 && form1ShowError == true">* required</div>
+
+    <!-- <input type="file" (change)="onFileChanged($event)"><br>
+    <img [src]="urlEventPicture" height="200"> -->
+
+    <div class="container" appDnd (fileDropped)="form1OnFileDropped($event)">
+      <input type="file" #fileDropRef id="fileDropRef" multiple (change)="form1FileBrowseHandler($event.target.files)" />
+      <mat-icon style="font-size: 50px; color: SkyBlue;">cloud_upload</mat-icon>
+      <h3>Drag & drop to upload</h3>
+      <br>
+      <label for="fileDropRef">Select file</label>
+    </div>
+    <div class="files-list">
+      <div class="single-file" *ngFor="let file of form1Files; let i = index">
+        <img [src]="file?.picture" height="50" width="50">
+        <div class="info">
+          <h4 class="name">{{ file?.name }}</h4>
+          <p class="size">{{ formatBytes(file?.size) }}</p>
+        </div>
+        <div class="delete" (click)="form1DeleteFile(i)">
+          <mat-icon style="font-size: 25px;">delete_forever</mat-icon>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <div style="text-align: right;">
+    <div style="color: red; padding-bottom: 10px; margin-right: 5%;" *ngIf="form1ShowError == true">
+      <b>Review form and try again.</b>
+    </div>
+    <div style="padding: 5px; border-radius: 50px; background-color:SkyBlue; text-align: center; width: 100px; margin: 0 auto; margin-right: 5%;">
+      <button mat-button style="border-radius: 50px; background-color:Blue; color: white; font-size: 18px; padding-left: 30px; padding-right: 30px;" (click)="form1GoForward()" matStepperNext>Next</button>
+    </div>
+  </div>
+</form>

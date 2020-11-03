@@ -1,0 +1,214 @@
+.card-container-component {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 2%;
+  margin-top: 1%;
+  border: 1px solid #339FFF;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important; //Set it after testing
+}
+
+.dotNumber {
+  padding: 3px;
+  // background-color: #bbb;
+  border-radius: 50%;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  font-size: 20px;
+}
+
+.matCard1 {
+  text-align: center;
+
+  .cardContainerCategory {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    // background: red;
+    margin: auto;
+    width: 45%;
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      width: 110px;
+      background: transparent;
+      align-items: center;
+      margin: 1px;
+      // background: rgb(141, 141, 0);
+    }
+
+  }
+
+  .matIconButtonCategory {
+    height: 75px;
+    width: 75px;
+    background-color:Azure;
+    margin: 5px;
+    border-radius: 50px;
+    cursor: pointer;
+    &.selected{
+      background-color: blue;
+      color: white;
+      border-radius: 50px;
+    }
+  }
+
+  .matIconButtonCategory:hover {
+    height: 75px;
+    width: 75px;
+    background-color: #339FFF;
+    border-radius: 50px;
+  }
+
+  mat-icon {
+    font-size: 50px;
+    display: flex;
+    padding: 13px;
+    color: SkyBlue;
+  }
+
+  .cardContainerSubCategory {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    // background: red;
+    margin: auto;
+    width: 40%;
+
+    .card {
+      margin: 1px;
+      // background: rgb(141, 141, 0);
+    }
+
+  }
+
+  .chipSubCategory {
+    background-color:Azure;
+    margin: 5px;
+    padding: 5px;
+    font-size: 15px;
+    color: blue;
+    cursor: pointer;
+    &.selected{
+      background-color: blue;
+      color: white;
+    }
+  }
+
+  .chipSubCategory:hover {
+    background-color: #339FFF;
+  }
+
+}
+
+.matCard2 {
+  text-align: center;
+
+  .matButtonToggle {
+    background-color:Azure;
+    padding: 1px;
+    font-size: 15px;
+    color: blue;
+    &.selected{
+      background-color: blue;
+      color: white;
+    }
+  }
+
+}
+
+.matCard3 {
+  text-align: center;
+
+  // mat-form-field {
+  //   background: blue;
+  // }
+
+}
+
+.matCard4N5 {
+  text-align: center;
+
+  mat-form-field {
+    width: 50%;
+    // background: blue;
+  }
+
+}
+
+.matCard6 {
+  text-align: center;
+
+  .container {
+    width: 20%;
+    height: 200px;
+    padding: 5px;
+    border: dashed 2px SkyBlue;
+    background-color: Azure;
+    margin: 0 auto;
+
+    input {
+      opacity: 0;
+      position: absolute;
+      width: 20%;
+      height: 200px;
+      margin-left: -9.3%;
+      cursor: pointer;
+    }
+
+    label {
+      color: white;
+      border-radius: 25px;
+      background-color:blue;
+      padding: 5px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    h3 {
+      font-size: 18px;
+      color: SkyBlue;
+    }
+  }
+
+  .files-list {
+    // background-color: red;
+    margin-top: 3px;
+
+    .single-file {
+      display: flex;
+      padding: 5px;
+      border: dotted 1px SkyBlue;
+      margin-bottom: 3px;
+
+      .delete {
+        display: flex;
+        cursor: pointer;
+        align-self: flex-end;
+      }
+
+      .name {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 2px;
+      }
+
+      .size {
+        font-size: 12px;
+        font-weight: 500;
+        color: #a4a4a4;
+        margin: 0;
+      }
+
+      .info {
+        width: 100%;
+      }
+    }
+  }
+
+}

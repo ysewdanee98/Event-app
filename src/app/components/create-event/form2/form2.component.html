@@ -1,0 +1,110 @@
+<form [formGroup]="secondFormGroup">
+  <!-- MatCard 7 -->
+  <mat-card class="matCard7 card-container-component">
+    <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">7</span> What is location?</mat-card-title>
+
+    <div style="text-align: right; color: red;" *ngIf="this.form2DropDown1CitySelected == null && (this.form2.form2AddressCtrl.value == '' || this.form2.form2AddressCtrl.value == null) && form2ShowError == true">* required</div>
+    <div style="text-align: right; color: red;" *ngIf="this.form2DropDown1CitySelected != null && this.form2DropDown2VenueSelected == null && form2ShowError == true">* required</div>
+    <div>
+      <mat-form-field style="width: 20%;" appearance="fill">
+        <mat-label>Select location</mat-label>
+        <mat-select>
+          <mat-option (onSelectionChange)="form2DropDown1CityOnSelectionChanged($event)">Select location</mat-option>
+          <mat-option (onSelectionChange)="form2DropDown1CityOnSelectionChanged($event)" *ngFor="let cities of form2Cities" [value]="cities.city">
+            {{cities.city}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <mat-form-field style="width: 20%;" appearance="fill" *ngFor='let city of form2Venues'>
+        <mat-label>Select venue</mat-label>
+        <mat-select>
+          <mat-option (onSelectionChange)="form2DropDown2VenueOnSelectionChanged($event)">Select venue</mat-option>
+          <mat-option (onSelectionChange)="form2DropDown2VenueOnSelectionChanged($event)" *ngFor="let venue of city.venues" [value]="venue">
+            {{venue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <div style="margin-left: 25%; margin-right: 57%;">Or type address if you are not find any</div>
+      <mat-form-field style="width: 50%;" appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="form2AddressCtrl" placeholder="Address" (blur)="form2AddressInputOnBlur($event)">
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <!-- MatCard 8 -->
+  <mat-card class="matCard8 card-container-component">
+    <mat-card-title><span style="padding-left: 8px; padding-right: 8px;" class="dotNumber">8</span> What is the price?</mat-card-title>
+
+    <div style="text-align: right; color: red;" *ngIf="form2MatButtonTogglePriceSelected.errors?.required && form2ShowError == true">* required</div>
+    <mat-button-toggle-group style="padding: 5px; border-radius: 50px; background-color:Azure;" formControlName="form2ButtonTogglePriceCtrl" required [class.is-invalid]="form2MatButtonTogglePriceSelected.invalid" class="form-control">
+      <mat-button-toggle style="border-top-left-radius: 75px 100px; border-bottom-left-radius: 75px 100px;" (click)="form2OperationMatButtonTogglePrice()" value="Free" class="matButtonToggle" [class.selected]="form2.form2ButtonTogglePriceCtrl.value=='Free'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Free &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-button-toggle>
+      <mat-button-toggle style="border-top-right-radius: 75px 100px; border-bottom-right-radius: 75px 100px;" (click)="form2OperationMatButtonTogglePrice()" value="Paid" class="matButtonToggle" [class.selected]="form2.form2ButtonTogglePriceCtrl.value=='Paid'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Paid &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <div *ngIf="form2.form2ButtonTogglePriceCtrl.value=='Paid'"><br>
+      <mat-card-content style="font-size: 20px;">How many different pricing?</mat-card-content>
+      <div class = "containerPricing">
+        <mat-button mat-icon-button style="color: white; cursor: pointer;" (click)="form2OperationNoofPricing('Minus')">
+          &nbsp;&nbsp;<mat-icon>remove</mat-icon>&nbsp;&nbsp;
+        </mat-button>
+        <input matInput style="background-color: white; width: 70px; height: 40px;" readonly [value]="form2NoOfPricing">
+        <mat-button mat-icon-button style="color: white; cursor: pointer;" (click)="form2OperationNoofPricing('Add')">
+          &nbsp;&nbsp;<mat-icon>add</mat-icon>&nbsp;&nbsp;
+        </mat-button>
+      </div>
+      <br>
+      <div style="text-align: right; color: red;" *ngIf="(form2TicketNameError == true || form2PriceError == true || form2CurrencyError == true) && form2ShowError == true">* something wrong</div>
+      <table class="center">
+        <tr style="text-align: left;">
+          <th>Ticket Name</th>
+          <th>Price</th>
+          <th>Currency</th>
+        </tr>
+        <tr *ngFor="let items of form2PricingItems">
+          <td>
+            <mat-form-field appearance="fill">
+              <mat-label>Ticket name</mat-label>
+              <input matInput formControlName="form2TicketName" placeholder="Ticket name" [(value)]="items.ticketName" (blur)="form2TicketNameInputOnBlur($event, items)" required>
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+          <td>
+            <mat-form-field appearance="fill">
+              <mat-label>Price</mat-label>
+              <input matInput formControlName="form2TicketPrice" placeholder="Price" [(value)]="items.price" (blur)="form2PriceInputOnBlur($event, items)" required>
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+          <td>
+            <mat-form-field appearance="fill">
+              <mat-label>Select currency</mat-label>
+              <mat-select formControlName="form2TicketCurrency" required>
+                <mat-option (onSelectionChange)="form2DropDown3CurrencyOnSelectionChanged($event, items)">Select currency</mat-option>
+                <mat-option (onSelectionChange)="form2DropDown3CurrencyOnSelectionChanged($event, items)" *ngFor="let currencies of form2PriceCurrencies" [value]="currencies.currency">
+                  {{currencies.currency}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card>
+
+  <div style="text-align: right;">
+    <div style="color: red; padding-bottom: 10px; margin-right: 5%;" *ngIf="form2ShowError == true">
+      <b>Review form and try again.</b>
+    </div>
+  </div>
+
+  <div class="form2BackNext">
+    <div style="padding: 5px; border-radius: 50px; text-align: center; width: 100px; margin: 0 auto; margin-left: 5%;">
+      <button mat-button style="border-radius: 50px; color: blue; font-size: 18px; padding-left: 30px; padding-right: 30px;" matStepperPrevious>Back</button>
+    </div>
+    <div style="padding: 5px; border-radius: 50px; background-color:SkyBlue; text-align: center; width: 100px; margin: 0 auto; margin-right: 5%;">
+      <button mat-button style="border-radius: 50px; background-color:Blue; color: white; font-size: 18px; padding-left: 30px; padding-right: 30px;" (click)="form2GoForward()" matStepperNext>Next</button>
+    </div>
+  </div>
+</form>
