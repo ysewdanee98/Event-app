@@ -53,7 +53,7 @@
 
       <mat-card-content>No of guests: {{this.form3.get('form3NoOfSpecialGuests').value}}</mat-card-content>
 
-      <mat-card-content *ngIf="this.form3.get('form3SpecialGuests').value > 0">
+      <mat-card-content *ngIf="this.form3.get('form3SpecialGuests').value.length > 0">
         <table>
           <tr style="text-align: center;">
             <th>Guest No.</th>

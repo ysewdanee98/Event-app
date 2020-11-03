@@ -18,7 +18,7 @@ export class Form3Component implements OnInit {
       form3RadioButtonCtrl: new FormControl('',[Validators.required]),
       form3NoOfPeopleExpected: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
       form3NoOfSpecialGuests: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      form3SpecialGuests: ['', Validators.required],
+      form3SpecialGuests: [[], Validators.required],
       form3GuestName: ['', Validators.required],
       form3GuestsPictures: [[]],
       form3AdditionalInfoCtrl: [],
@@ -87,7 +87,7 @@ export class Form3Component implements OnInit {
         this.thirdFormGroup.get("form3GuestName").setValidators(null);
         console.log("No of guests: 0");
         this.thirdFormGroup.get("form3SpecialGuests").setValidators(null);
-        this.thirdFormGroup.get("form3SpecialGuests").setValue(null);
+        this.thirdFormGroup.get("form3SpecialGuests").setValue([]);
       } else {
         this.form3NoOfSpecialGuests = this.form3NoOfSpecialGuests -1;
         this.form3SpecialGuests.pop();
